@@ -415,12 +415,25 @@ html, body {
   background-color: transparent;
 }
 
+/* ⭐️ 전체 어두운 백드롭 레이어 */
+.expanded-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px); /* 뒷배경 흐림 효과 */
+  z-index: 900;
+  animation: fadeIn 0.3s ease forwards;
+}
+
 /* ⭐️ 개별 랜덤 배치 액자 스타일 */
 .project-random-frame {
   position: absolute; /* ◀️ 랜덤 좌표 배치를 위한 필수 속성 */
   width: 320px; 
 
-  overflow: hidden;
+  overflow: visible !important;
   display: flex;
   flex-direction: column;
   
@@ -428,6 +441,11 @@ html, body {
   user-select: none;
   /* 등장 시 은은하게 페이드인 */
   animation: frameFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  /* ⭐️ 위치이동(top, left) 및 transform 스케일 변화에 부드러운 애니메이션 부여 */
+  transition: top 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              left 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.3s ease;
 }
 
 /* 호버 시 깊이감을 주기 위해 위로 올라오는 연출 */
@@ -443,11 +461,30 @@ html, body {
   cursor: grabbing !important;
 }
 
+.frame-inner-layout {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.project-image-wrapper {
+  position: relative;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; /* 커졌을 때 찌그러짐 방지 */
+}
 
 /* 이미지 액자 영역 */
 .project-image-wrapper {
   position: relative;
   width: 100%;
+  height: 100%;
   
   overflow: hidden;
 
@@ -474,4 +511,102 @@ html, body {
 
 .project-card-frame:hover .project-represent-img {
   transform: scale(1.04); /* 호버 시 이미지가 액자 안에서 미세하게 줌인되는 세련된 효과 */
+}
+
+/* ⭐️ [핵심] 2배 커진 액자 내부 스위치에 맞춰 우측으로 자연스럽게 생성되는 디테일 텍스트 창 */
+.project-expanded-detail {
+  position: absolute;
+  left: 100%; /* 액자 박스의 100% 지점(오른쪽 끝)에서부터 시작 */
+  top: 0;
+  width: 100%; /* 상세 텍스트 창의 가로폭 */
+  height: 100%;
+  background-color: transparent;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  overflow-y: visible; /* 내용이 길어질 경우 */
+  /* 등장 시 오른쪽으로 밀려나오는 애니메이션 */
+  animation: slideOut 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform-origin: left;
+}
+
+/* 상세 보기 내부 폰트 스타일링 (정밀 축소 반영 - 2배 커지기 때문에 폰트는 작게 세팅) */
+.detail-title {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.detail-type-tag {
+  align-self: flex-start;
+  font-size: 6px;
+  background-color: #222;
+  color: #fff;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.detail-description {
+  margin: 0;
+  font-size: 7px;
+  color: #ffffff;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.detail-section h4 {
+  margin: 0;
+  font-size: 7px;
+  color: #f3f3f3;
+  font-weight: 600;
+}
+
+.detail-section p {
+  margin: 0;
+  font-size: 6.5px;
+  color: #e4e4e4;
+
+  white-space: pre-line;
+}
+
+.detail-stacks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.detail-stack-badge {
+  font-size: 5.5px;
+  background-color: #f1f3f5;
+  color: #495057;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+/* 애니메이션 키프레임 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 0;
+    transform: scaleX(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }

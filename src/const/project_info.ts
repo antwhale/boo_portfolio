@@ -46,10 +46,10 @@ export const androidProjects: ProjectInfo[] = [
     type: "안드로이드 웹앱(Kotlin)",
     appDescription: "엄마, 아빠를 위한 우리아이 이유식 관리 앱",
     userCnt: 1000,
-    workHistory: "웹뷰 Interface를 통한 네이티브 기능 구현" +
-        "SNS로그인 구현(네이버, 카카오, 구글)" +
-        "인앱결제 구현" +
-        "FCM 푸시 알림 구현" +
+    workHistory: "웹뷰 Interface를 통한 네이티브 기능 구현\n" +
+        "SNS로그인 구현(네이버, 카카오, 구글)\n" +
+        "인앱결제 구현\n" +
+        "FCM 푸시 알림 구현\n" +
         "애드몹 구현",
     stacks: "MVVM패턴, LiveData, Flow, Coroutine, Billing3",
     workDuration: "2022.03 ~ 2022.03",
@@ -65,12 +65,12 @@ export const androidProjects: ProjectInfo[] = [
     type: "안드로이드 네이티브 태블릿 앱(Kotlin)",
     appDescription: "한국전력에서 사용하는 전주 측정 차량에서 DB(MSsql)에 직접 접속하여 전주 데이터와 나의 위치를 조회하는 앱 (마켓출시x)",
     userCnt: 1000,
-    workHistory: "JTDS 드라이버를 이용하여 DB 접속, 조회, 업데이트" +
-        "현재 위치, 속도 그리고 가장 가까운 위치의 전주 데이터를 DB에 조회하여 실시간으로 보여줌(RxJava, Flow, Coroutine 활용)" +
-        "각종 데이터를 데이터바인딩을 활용하여 View에 노출" +
-        "구글맵 연동" +
+    workHistory: "JTDS 드라이버를 이용하여 DB 접속, 조회, 업데이트\n" +
+        "현재 위치, 속도 그리고 가장 가까운 위치의 전주 데이터를 DB에 조회하여 실시간으로 보여줌\n" +
+        "각종 데이터를 데이터바인딩을 활용하여 View에 노출\n" +
+        "구글맵 연동\n" +
         "카카오 내비게이션 연동",
-    stacks: "MVVM패턴, DataBinding, Hilt, Glide, JTDS, Crashlytics, RxJava, Coroutine, Flow, Paging3, LiveData, MSsql",
+    stacks: "MVVM패턴, DataBinding, Hilt, Glide, JTDS, Crashlytics, RxKotlin, Coroutine, Flow, Paging3, LiveData, MSsql",
     workDuration: "2022.08 ~ 2022.10",
     images: [
       "https://blogger.googleusercontent.com/img/a/AVvXsEixsbnGA9CdAr0Yipww8Vsx7IdXro-9TJkbpE6SWG0U2myvgFXjphlsMT3g5WClrR1V68jyu13UoYF6P3D2HZRHjoraFC_rbmxsYTGDc93hGhKSw_OavY3YkAO59anoz4fic9eC3eVG5pAbFS-WJ6OkFsfyqFJqm4npd_xwU_uv6pSJGD-x3kdvEbkE3wo",
@@ -84,9 +84,9 @@ export const androidProjects: ProjectInfo[] = [
     type: "안드로이드 네이티브(JAVA)",
     appDescription: "㈜에이스인스트루먼트의 모델 5481 디지털 수직, 수평 경사계를 운용하는 전용 앱",
     userCnt: 1000,
-    workHistory: "블루투스를 이용하여 디지털 수직, 수평 경사계로 측정 데이터 수집(RxBle)" +
-        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기, MediaStore로 공유저장소에 측정파일 저장" +
-        "측정 데이터 그래프로 나타내기(MPAndroidChart)" +
+    workHistory: "블루투스를 이용하여 디지털 수직, 수평 경사계로 측정 데이터 수집(RxBle)\n" +
+        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기, MediaStore로 공유저장소에 측정파일 저장\n" +
+        "측정 데이터 그래프로 나타내기(MPAndroidChart)\n" +
         "측정 파일 이메일로 보내기 기능 개발",
     stacks: "RxBle, RxJava, MediaStore, File API, JAVA, SAF, MPAndroid",
     workDuration: "2022.10 ~ 2022.12",
@@ -104,9 +104,9 @@ export const androidProjects: ProjectInfo[] = [
     type: "안드로이드 네이티브(JAVA)",
     appDescription: "㈜에이스인스트루먼트의 모델 5411 디지털 경사계를 운용하는 전용 앱",
     userCnt: 1000,
-    workHistory: "블루투스를 이용하여 디지털 경사계로 측정 데이터 수집(RxBle)" +
-        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기, MediaStore로 공유저장소에 측정파일 저장" +
-        "측정 데이터 그래프로 나타내기(MPAndroidChart)" +
+    workHistory: "블루투스를 이용하여 디지털 경사계로 측정 데이터 수집(RxBle)\n" +
+        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기, MediaStore로 공유저장소에 측정파일 저장\n" +
+        "측정 데이터 그래프로 나타내기(MPAndroidChart)\n" +
         "측정 파일 이메일로 보내기 기능 개발",
     stacks: "RxBle, RxJava, MediaStore, File API, JAVA, SAF, MPAndroid",
     workDuration: "2022.10 ~ 2022.12",
@@ -153,8 +153,8 @@ export const androidProjects: ProjectInfo[] = [
     type: "안드로이드 네이티브 앱(Kotlin)",
     appDescription: "정부과제 앱: 경찰이 사건현장의 정보를 AI 활용하여 기록하는 앱",
     userCnt: 500000,
-    workHistory: "LLM AI 모델 사용한 자동 사건 정보 작성 기능 구현" +
-        "Compose 활용한 뷰 그리기" + 
+    workHistory: "LLM AI 모델 사용한 자동 사건 정보 작성 기능 구현\n" +
+        "Compose 활용한 뷰 그리기\n" + 
         "네이버 STT 활용한 음성인식 구현",
     stacks: "Compose, Hilt, Navigation, MVVM, Retrofit2, Coil, Datastore, CameraX, LLM",
     workDuration: "2023.10 ~ 2024.10",
@@ -170,12 +170,12 @@ export const androidProjects: ProjectInfo[] = [
     type: "안드로이드 네이티브 앱(Kotlin)",
     appDescription: "실서비스를 위한 POC 과정의 AI Agent 앱 개발 + 2026 CES 전시",
     userCnt: 0,
-    workHistory: "차량 매뉴얼 / DTC코드 / 자동차 정비 매뉴얼 등의 사전 지식 학습 데이터로 LLM을 활용한 질의-응답 대화형 서비스 구현" +
-        "Bge-M3 임베딩 모델과 VectorDB(ObjectBox) 활용하여 RAG 기능 구현" +    
-        "자동차 현재 상태, 사용자의 서비스 습관 등의 이벤트를 수집하여 사용자 맞춤형 서비스를 제공하는 AI 비서 기능 구현" + 
-        "재생되는 노래에 어울리는 DJ멘트 생성 기능 구현" + 
-        "급가속, 급정거시 심각성에 따라 사용자에게 경고 멘트 생성 기능 구현" + 
-        "운전자의 데이터를 분석하여 차량 온도, 내비게이션, 드라이빙모드 변경 추천 기능 구현" +
+    workHistory: "차량 매뉴얼 / DTC코드 / 자동차 정비 매뉴얼 등의 사전 지식 학습 데이터로 LLM을 활용한 질의-응답 대화형 서비스 구현\n" +
+        "Bge-M3 임베딩 모델과 VectorDB(ObjectBox) 활용하여 RAG 기능 구현\n" +    
+        "자동차 현재 상태, 사용자의 서비스 습관 등의 이벤트를 수집하여 사용자 맞춤형 서비스를 제공하는 AI 비서 기능 구현\n" + 
+        "재생되는 노래에 어울리는 DJ멘트 생성 기능 구현\n" + 
+        "급가속, 급정거시 심각성에 따라 사용자에게 경고 멘트 생성 기능 구현\n" + 
+        "운전자의 데이터를 분석하여 차량 온도, 내비게이션, 드라이빙모드 변경 추천 기능 구현\n" +
         "유니티를 사용하여 3D 아바타 구현",
     stacks: "STT, TTS, MAOS, ONNX, HuggingFace Tokenizer, ObjectBox, DJL, Lottie, Unity",
     workDuration: "2026.07 ~ 2026.12",
@@ -191,10 +191,10 @@ export const androidProjects: ProjectInfo[] = [
     type: "안드로이드 네이티브 앱(Kotlin)",
     appDescription: "현재 재생중인 미디어앱의 정보를 보여주고 간단한 조작을 가능하게하는 미니플레이어 앱입니다.",
     userCnt: 0,
-    workHistory: "Compose를 사용하여 FloatingView UI개발" +
-        "미디어 세션을 사용하여 현재 재생되는 미디어 정보 추출" +    
-        "PBV 하드키로 미디어 기능 조작할 수 있는 편리한 Interface 구현" + 
-        "Compose 활용한 애니메이션 기능 구현" + 
+    workHistory: "Compose를 사용하여 FloatingView UI개발\n" +
+        "미디어 세션을 사용하여 현재 재생되는 미디어 정보 추출\n" +    
+        "PBV 하드키로 미디어 기능 조작할 수 있는 편리한 Interface 구현\n" + 
+        "Compose 활용한 애니메이션 기능 구현\n" + 
         "MADI 활용하여 CleanArchitecture 구현",
     stacks: "Compose, Coroutine, Flow, Coil, MediaSession, MAOS",
     workDuration: "2025.02 ~ 2026.02",
@@ -213,9 +213,9 @@ export const iosProjects: ProjectInfo[] = [
         type: "iOS 네이티브 앱(Swift)",
         appDescription: "㈜에이스인스트루먼트의 모델 5481 디지털 수직, 수평 경사계를 운용하는 전용 앱",
         userCnt: 500,
-        workHistory: "블루투스를 이용하여 디지털 수직, 수평 경사계로 측정 데이터 수집" +
-            "FileManager 측정파일 가져오기 및 저장" +
-            "측정 데이터 그래프로 나타내기" +
+        workHistory: "블루투스를 이용하여 디지털 수직, 수평 경사계로 측정 데이터 수집\n" +
+            "FileManager 측정파일 가져오기 및 저장\n" +
+            "측정 데이터 그래프로 나타내기\n" +
             "측정 파일 이메일로 보내기 기능 개발",
         stacks: "CoreBluetooth, FileManager, Charts, Swift",
         workDuration: "2023.03 ~ 2023.05",
@@ -233,9 +233,9 @@ export const iosProjects: ProjectInfo[] = [
         type: "iOS 네이티브 앱(Swift)",
         appDescription: "㈜에이스인스트루먼트의 모델 5411 디지털 경사계를 운용하는 전용 앱",
         userCnt: 500,
-        workHistory: "블루투스를 이용하여 디지털 경사계로 측정 데이터 수집" +
-            "FileManager 측정파일 가져오기 및 저장" +
-            "측정 데이터 그래프로 나타내기" +
+        workHistory: "블루투스를 이용하여 디지털 경사계로 측정 데이터 수집\n" +
+            "FileManager 측정파일 가져오기 및 저장\n" +
+            "측정 데이터 그래프로 나타내기\n" +
             "측정 파일 이메일로 보내기 기능 개발",
         stacks: "CoreBluetooth, FileManager, Charts, Swift",
         workDuration: "2023.05 ~ 2023.07",

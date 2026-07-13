@@ -20,8 +20,12 @@ interface DragState {
 const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<DragState | null>(null);
+  const isMovedRef = useRef<boolean>(false);    //드래그 이동 여부를 기록하는 독립적인 플래그 ref 생성
 
-  // ⭐️ 각 카드의 실시간 위치(px 또는 %)를 관리하기 위한 상태 변수
+  // 현재 확대(상세 보기)된 프로젝트의 인덱스 관리 상태
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+
+  //  각 카드의 실시간 위치(px 또는 %)를 관리하기 위한 상태 변수
   // 초기 렌더링 시 계산된 값을 보관하고, 드래그 시 이 값을 변경합니다.
   const [positions, setPositions] = useState<{ [key: number]: { top: number; left: number, zIndex: number  } }>(() => {
     const initialPositions: { [key: number]: { top: number; left: number, zIndex: number } } = {};
@@ -48,6 +52,8 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
   // ⭐️ [드래그 시작 핸들러] 마우스 클릭 / 터치 다운
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent, index: number) => {
     console.log('handleDragStart');
+
+    if (expandedIdx !== null) return; // 이미 확대된 상태라면 드래그 불가
     // 텍스트 드래그 선택 현상 방지
     if (e.type === 'mousedown') e.preventDefault();
 
@@ -62,8 +68,10 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
       startX: clientX,
       startY: clientY,
       startLeft: currentPos.left,
-      startTop: currentPos.top
+      startTop: currentPos.top,
     };
+
+    isMovedRef.current = false;   //시작할 때는 이동하지 않은 상태로 초기화
 
     // 움직일 때 전역 이벤트를 감지하도록 리스너 등록
     window.addEventListener('mousemove', handleDragging);
@@ -96,6 +104,11 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
     const deltaX = ((clientX - dragInfo.startX) / containerWidth) * 100;
     const deltaY = ((clientY - dragInfo.startY) / containerHeight) * 100;
 
+    // ⭐️ 미세한 마우스 흔들림을 제외하고 실질적으로 이동 거리가 생기면 드래그로 판별
+    if (Math.abs(clientX - dragInfo.startX) > 3 || Math.abs(clientY - dragInfo.startY) > 3) {
+      isMovedRef.current = true;
+    }
+
     const targetIndex = dragInfo.index;
 
     setPositions((prev) => ({
@@ -110,8 +123,6 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
 
   // ⭐️ [드래그 종료 핸들러] 마우스 뗌 / 터치 끝
   const handleDragEnd = () => {
-    dragRef.current = null;
-    
     // 이벤트 리스너 제거
     window.removeEventListener('mousemove', handleDragging);
     window.removeEventListener('mouseup', handleDragEnd);
@@ -119,10 +130,22 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
     window.removeEventListener('touchend', handleDragEnd);
   };
 
-  const handleClick = () => {
-    console.log("handleClick");
+  // ⭐️ [클릭 핸들러] 드래그하지 않고 순수하게 탭했을 때만 확대 트리거
+  const handleFrameClick = (index: number) => {
+    // 만약 드래그 중이었다면 확대를 시키지 않습니다.
+    if (isMovedRef.current) {
+      isMovedRef.current = false;
+      dragRef.current = null;
+      return;
+    }
 
-
+    // 이미 켜져있는 걸 누르면 끄고, 아니면 해당 인덱스로 확대 지정
+    if (expandedIdx === index) {
+      setExpandedIdx(null);
+    } else {
+      setExpandedIdx(index);
+    }
+    dragRef.current = null;
   };
 
   if (!projects || projects.length === 0) {
@@ -131,6 +154,11 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
 
   return (
     <div className="projects-random-container" ref={containerRef}>
+      {/*  배경 레이어 클릭 시 확대 모드 해제 */}
+      {expandedIdx !== null && (
+        <div className="expanded-backdrop" onClick={() => setExpandedIdx(null)} />
+      )}
+
         {projects.map((project, index) => {
           // ⭐️  images 배열의 첫 번째 이미지를 추출합니다. (없을 경우를 대비한 Fallback 처리)
           const representImage = project.images && project.images.length > 0 
@@ -143,39 +171,74 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
         const aspectRatio = project.imageDirection === 'v' ? '2 / 3' : '3 / 2';
         const frameImageUrl = project.imageDirection === 'v' ? frameV : frameH;
 
+        const isExpanded = expandedIdx === index;
+
         return (
           <div key={`${project.title}-${index}`} 
-            className="project-random-frame"
+            className={`project-random-frame ${isExpanded ? 'is-expanded' : ''}`}
             style={{
-            top: `${pos.top}%`,
-            left: `${pos.left}%`,
-            zIndex: pos.zIndex,
-            cursor: 'grab'
+            top: isExpanded ? '50%' : `${pos.top}%`,
+            left: isExpanded ? '30%' : `${pos.left}%`,
+            zIndex: isExpanded ? 999 : pos.zIndex,
+            transform: isExpanded ? 'translate(-50%, -50%) scale(2)' : 'none',
+            cursor: isExpanded ? 'default' : 'grab'
           }}
           onMouseDown={(e) => handleDragStart(e, index)}
           onTouchStart={(e) => handleDragStart(e, index)}
-          onClick={() => handleClick()}
+          onClick={() => handleFrameClick(index)}
           >
-          {/* 이미지 액자 영역 */}
-          <div
-            className="project-image-wrapper"
-            style={{ 
-            aspectHeight: undefined,
-            aspectRatio: aspectRatio,
-            backgroundImage: `url('${frameImageUrl}')`
-          } as React.CSSProperties}
-          >
-            <img 
-              src={representImage} 
-              alt={`${project.title} 대표 이미지`} 
-              className="project-represent-img"
-              loading="lazy" // 성능 최적화를 위한 지연 로딩
-              width={project.imageDirection === 'v' ? '60%' : '80%'}
-              draggable='false'
-            />
-          </div>
+            <div className="frame-inner-layout">
+              {/* 이미지 액자 영역 */}
+              <div
+                className="project-image-wrapper"
+                style={{ 
+                aspectHeight: undefined,
+                aspectRatio: aspectRatio,
+                backgroundImage: `url('${frameImageUrl}')`
+              } as React.CSSProperties}
+              >
+                <img 
+                  src={representImage} 
+                  alt={`${project.title} 대표 이미지`} 
+                  className="project-represent-img"
+                  loading="lazy" // 성능 최적화를 위한 지연 로딩
+                  width={project.imageDirection === 'v' ? '60%' : '80%'}
+                  draggable='false'
+                />
+              </div>
 
-        
+              {/* ⭐️ [핵심 추가] 2배 커졌을 때 오른쪽에 노출할 상세 텍스트 패널 */}
+              {isExpanded && (
+                <div className="project-expanded-detail" onClick={(e) => e.stopPropagation()}>
+                  <h3 className="detail-title">{project.title}</h3>
+                  <span className="detail-type-tag">{project.type}</span>
+                  <p className="detail-description">{project.appDescription}</p>
+                  
+                  {project.workHistory && (
+                    <div className="detail-section">
+                      <h4>📊 작업 내역</h4>
+                      <p>{project.workHistory}</p>
+                    </div>
+                  )}
+
+                  {project.userCnt > 0 && (
+                    <div className="detail-section">
+                      <h4>👥 이용자 수</h4>
+                      <p>{project.userCnt.toLocaleString()}명 이용 중</p>
+                    </div>
+                  )}
+
+                  <div className="detail-section">
+                    <h4>🛠️ 사용 기술 스택</h4>
+                    <div className="detail-stacks">
+                      {project.stacks.split(',').map((stack, sIdx) => (
+                        <span key={sIdx} className="detail-stack-badge">{stack.trim()}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         );
       })}
