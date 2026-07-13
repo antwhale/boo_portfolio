@@ -1,5 +1,64 @@
+/* 1. 브라우저의 기본 여백을 완전히 제거합니다 (최상단에 추가) */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* ⭐️ 화면 밖으로 나가는 스크롤을 완전히 차단하고 싶을 때 사용 */
+}
+
 .App {
+  width: 100%;
+  min-height: 100vh;
   text-align: center;
+  position: relative; /* 별들이 .App을 기준으로 배치되도록 설정 */
+  
+  /* ⭐️ linear-gradient를 이미지 앞에 추가하여 어두운 반투명 막을 씌웁니다 */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url("https://notbigmuzzy.github.io/goghwiththeflow/images/landing.jpg");
+                    
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* 3. 별 스타일 */
+.star {
+  position: absolute; /* .App 안에서 자유롭게 배치 */
+  background-color: white; /* 별 색상 */
+  border-radius: 50%; /* 동그랗게 */
+  z-index: 30;
+  /* 
+     - var(--duration): 별마다 다른 이동 속도
+     - var(--delay): 별마다 다른 출발 시간 (엇박자 생성)
+     - alternate: 갔다가 다시 되돌아오는 왕복 운동
+     - linear: 일정한 속도로 부드럽게 이동
+  */
+  animation: drift var(--duration) infinite alternate linear;
+}
+
+/* ⭐️ 화면 가로 전체를 왕복하는 애니메이션 */
+@keyframes drift {
+  from {
+    /* 
+       시작점을 var(--start-x)로 지정합니다. 
+       애니메이션이 동시에 시작되지 않도록 랜덤 딜레이를 적용합니다.
+    */
+    left: var(--start-x);
+    animation-delay: var(--delay);
+  }
+  to {
+    /* 끝점을 var(--end-x)로 지정하여 반대편 화면 끝으로 보냅니다. */
+    left: var(--end-x);
+  }
+}
+
+/* 기존 콘텐츠 스타일 */
+.preload-instructions {
+  position: relative; /* 배경보다 위에 표시 */
+  z-index: 10;
+  color: rgb(100, 100, 100);
+  padding-top: 10vh;
 }
 
 .App-logo {
@@ -35,4 +94,384 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ⭐️ Swiper 감싸는 컨테이너: 하단 중앙 배치 */
+.carousel-wrapper {
+  position: absolute;
+  bottom: 0 !important;       /* 화면 아래에서 살짝 띄움 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120vw;       /* 가로 비율 설정 */
+  max-width: 1000px;  /* 최대 크기 제한 */
+  z-index: 30;
+  padding: 0 40px;   /* 좌우 화살표 버튼이 들어갈 공간 확보 */
+  box-sizing: border-box;
+  backdrop-filter: blur(20px);
+  border-radius: 16px 16px 0px 0px;
+}
+
+/* Swiper 컴포넌트 자체 커스텀 */
+.mySwiper {
+  width: 100%;
+  padding: 0 !important;
+
+  /* 마우스가 없을 때는 배경이 완전히 투명하고 블러도 없음 */
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(0px);
+
+  /* 부드러운 전환 효과 */
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Swiper 중앙 하단에 동그라미 추가 */
+.mySwiper::after {
+  content: ""; /* 가상 요소를 만들기 위한 필수 속성 */
+  position: absolute;
+  bottom: 0px;   
+  left: 50%;     
+  transform: translateX(-50%); /* 정확한 가로 중앙 정렬 */
+  
+  width: 6px;    /* 동그라미 가로 크기 */
+  height: 6px;   /* 동그라미 세로 크기 */
+  background-color: rgb(166, 165, 165); /* 하얀색 채우기 */
+  border-radius: 50%; /* 동그랗게 만들기 */
+}
+
+/* 마우스 포인터가 mySwiper 위에 올려졌을 때 */
+.mySwiper:hover {
+  background: rgba(255, 255, 255, 0.12); /* 반투명 흰색 배경 채우기 */
+  backdrop-filter: blur(20px);           /* blur 처리 */
+}
+
+/* 개별 카드 스타일 */
+.carousel-card {
+  position: relative;
+  height: 90px;
+  border-radius: 16px 16px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+
+  /* ⭐️ 평소에는 텍스트 색상을 희미하게 만듦 (투명도 0.4) */
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* 현재 중앙에 활성화된 슬라이드 부각시키기 */
+.swiper-slide-active .carousel-card {
+  background: rgba(255, 255, 255, 0.25);
+  /* border: 0px solid rgba(255, 255, 255, 0.4); */
+  color: white;
+}
+
+/* ⭐️마우스 포인터가 mySwiper 위에 올려졌을 때 내부 텍스트 변화 */
+/* mySwiper에 hover가 일어나는 순간, 그 안의 모든 카드의 글자색을 하얀색으로 깨웁니다. */
+.mySwiper:hover .carousel-card{
+  color: rgba(255, 255, 255, 1); /* 모두 선명한 하얀색으로 변경 */
+  background: transparent !important; /* ⭐️ 선택 여부 상관없이 모든 카드의 배경색을 투명하게 통일 */
+}
+
+
+/* ⭐️ Swiper 내장 내비게이션 버튼 커스텀 스타일 */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff !important; /* 화살표 색상을 흰색으로 */
+  transform: scale(0.6);     /* 화살표 크기 살짝 줄임 */
+}
+
+/* 화살표가 카드 영역 밖 좌우 끝에 이쁘게 걸치도록 위치 미세조정 */
+.swiper-button-next { right: 0px !important; }
+.swiper-button-prev { left: 0px !important; }
+
+/* ⭐️ New Screen (Modal) Overly Styles */
+
+/* 1. Full-screen darkening background overlay */
+.modal-overlay {
+  position: fixed; /* Fixed position relative to viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75); /* Dark semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center content vertically and horizontally */
+  z-index: 1000; /* Ensure it is above EVERYTHING else */
+  opacity: 0;
+  animation: fadeInOverlay 0.4s ease forwards; /* Smooth fade-in animation */
+}
+
+/* 2. Main modal content box */
+.modal-content {
+  position: relative;
+  width: 80%;
+  max-width: 600px; /* Limit maximum width */
+  max-height: 80vh; /* Limit maximum height */
+  background: rgba(20, 20, 30, 0.9); /* Dark background matching theme */
+  backdrop-filter: blur(15px); /* Trendy glassmorphism effect */
+  color: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deep shadow */
+  overflow-y: auto; /* Enable vertical scroll for content if needed */
+  
+  transform: translateY(30px);
+  animation: slideInContent 0.4s ease forwards 0.1s; /* Slide-in from below */
+}
+
+/* Container for actual content within the modal */
+.modal-inner {
+    text-align: left;
+}
+
+.modal-inner h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+}
+
+.modal-inner p strong {
+    color: #ffd700; /* Gold color for highlighting selected card name */
+}
+
+.placeholder-content {
+    margin-top: 30px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+/* 3. Modal close button (top-right '×') */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.close-button:hover {
+  color: white;
+  transform: scale(1.1); /* Slight enlarge on hover */
+}
+
+/* Fade-in animation for overlay */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide-in animation for content */
+@keyframes slideInContent {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.full-white-screen {
+  position: fixed;     /* 스크롤에 상관없이 화면 뷰포트에 고정 */
+  top: 0;
+  left: 0;
+  width: 100vw;        /* 화면 전체 가로폭 */
+  height: 100vh;       /* 화면 전체 세로폭 */
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(13px); 
+  -webkit-backdrop-filter: blur(20px); /* Safari 브라우저 지원용 */
+  color: #1a1a24;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  z-index: 20;       /* ⭐️ 배경, 별, Swiper 등 모든 요소보다 가장 위에 위치 */
+  
+  opacity: 1; /* 대기 시간 없이 바로 100% 노출 */
+  animation: popInFullPage 0.1s ease-out forwards;
+}
+
+/* 내부 콘텐츠 스타일 */
+.full-screen-content {
+  text-align: center;
+}
+.full-screen-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* 닫기 버튼 (우측 상단 X) */
+.modal-close-btn {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  background: transparent;
+  border: none;
+  font-size: 2.5rem;
+  color: #333333;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.modal-close-btn:hover {
+  transform: scale(1.15);
+  color: #000000;
+}
+
+/* ⭐️ 즉각적인 팝인 효과 애니메이션 */
+@keyframes popInFullPage {
+  from { 
+    opacity: 0;
+    transform: scale(1.02); /* 아주 살짝 커진 상태에서 탁 켜지는 느낌 */
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.random-rect {
+  position: absolute;
+  box-sizing: border-box;
+  background-color: transparent; /* 내부는 투명 */
+
+  z-index: 20;       /* ⭐️ 배경, 별, Swiper 등 모든 요소보다 가장 위에 위치 */
+
+  /* ⭐️ [조건] 왼쪽/오른쪽 테두리 두께는 2px, 위/아래 테두리 두께는 4px */
+  border-width: 6px 3px 6px 3px; 
+  border-style: solid;
+  
+  /* ⭐️ [조건] 모서리(테두리) 색상은 옅은 회색 */
+  border-color: rgba(180, 180, 180, 0.4); 
+  
+  /* 초기에 숨겨두었다가 애니메이션 실행 */
+  opacity: 0;
+  
+  transition: none;
+
+  /* [수정] 애니메이션 이름을 변경하고, 통통 튀는 탄성 속도 곡선(cubic-bezier)을 지정합니다. */  
+  animation: popInRect 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--rect-delay);
+
+  /*원래 이동 거리인 var(--x)에 사각형 고유 속도인 var(--speed)를 곱해줍니다!*/
+  transform: translateX(calc(var(--x, 0px) * var(--speed, 1)));  
+  pointer-events: none; /* 마우스나 터치 조작을 방해하지 않음 */
+}
+
+/* 통통 튀어나오는 탄성(Bounce) 애니메이션 정의 */
+@keyframes popInRect {
+  0% {
+    opacity: 0;
+    /* 처음에는 아예 작아진 상태(scale 0)에서 시작합니다. */
+    transform: translateX(calc(var(--x, 0px) * var(--speed, 1))) scale(0);
+  }
+  
+  100% {
+    opacity: 1;
+    /* 다시 정상 크기인 1로 안정화됩니다. */
+    transform: translateX(calc(var(--x, 0px) * var(--speed, 1))) scale(1);
+  }
+}
+
+.random-rect.leaving {
+  animation: fadeOutRect 2s ease-in-out forwards !important;
+
+  animation-delay: var(--rect-delay) !important;
+}
+
+
+@keyframes fadeOutRect {
+  0% {
+    opacity: 1;
+    /* 손을 뗀 최종 시점의 X축 위치와 크기(scale 1)를 유지한 상태에서 시작 */
+    transform: translateX(calc(var(--x, 0px) * var(--speed, 1))) scale(1);
+  }
+  100% {
+    opacity: 0;
+    /* ⭐️ 완전히 투명해지면서 크기도 부드럽게 약간 작아지며(scale 0.9) 사라집니다. */
+    transform: translateX(calc(var(--x, 0px) * var(--speed, 1))) scale(0.9);
+  }
+}
+
+/* 부모 컨테이너: 화면 전체 영역을 차지하도록 구획 */
+.projects-random-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* 영역 밖으로 나가는 액자 스크롤 유발 방지 */
+  background-color: transparent;
+}
+
+/* ⭐️ 개별 랜덤 배치 액자 스타일 */
+.project-random-frame {
+  position: absolute; /* ◀️ 랜덤 좌표 배치를 위한 필수 속성 */
+  width: 320px; 
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+  /* 사용자가 글자나 박스를 드래그 선택하는 파란 블록 지정 현상 방지 */
+  user-select: none;
+  /* 등장 시 은은하게 페이드인 */
+  animation: frameFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* 호버 시 깊이감을 주기 위해 위로 올라오는 연출 */
+.project-random-frame:hover {
+  transform: translateY(-8px) scale(1.02);
+  z-index: 999 !important; /* 마우스를 올린 액자가 일시적으로 가장 앞으로 튀어나옴 */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 마우스로 꾹 쥐었을 때 주먹 모양 커서로 변경 */
+.project-random-frame:active {
+  cursor: grabbing !important;
+}
+
+
+/* 이미지 액자 영역 */
+.project-image-wrapper {
+  position: relative;
+  width: 100%;
+  
+  overflow: hidden;
+
+  background-size: contain;
+  /* ⭐️ 액자 프레임 이미지가 바둑판처럼 조각조각 반복 노출되지 않도록 방지 */
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center; /* 자식들을 가로 정가운데 정렬 */
+  align-items: center;     /* 자식들을 세로 정가운데 정렬 */
+
+  /* ⭐️ 래퍼 박스 크기에 맞춰 배경 프레임 이미지가 딱 맞게 늘어나거나 줄어들도록 설정 */
+  background-size: cover;
+}
+
+/* 대표 이미지 */
+.project-represent-img {
+  position: relative;
+
+  height: 100%;
+  object-fit: contain; /* 이미지가 찌그러지지 않고 액자에 꽉 차게 채움 */
+  transition: transform 0.5s ease;
+}
+
+.project-card-frame:hover .project-represent-img {
+  transform: scale(1.04); /* 호버 시 이미지가 액자 안에서 미세하게 줌인되는 세련된 효과 */
 }
