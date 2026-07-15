@@ -26,7 +26,7 @@ function App() {
   const [isRectanglesShow, setRectanglesShow] = useState(false);
   const [projectList, setProjectList] = useState<ProjectInfo[]>([]);
   const [isProjectListShow, setProjectListShow] = useState(false);
-
+  const [isProjectSelected, setProjectSelected] = useState(false);
   
 
   const handleSlideChange = (swiper: any) => {
@@ -64,6 +64,7 @@ function App() {
     setRectanglesLeaving(true);
 
     setTimeout(() => {
+      console.log('show project list');
       setTouchTrigger(0);
       setRectanglesLeaving(false);
       setRectanglesShow(false);
@@ -89,6 +90,23 @@ function App() {
     // console.log('diffX: ', diffX);
   }
 
+  const handleSwiperInit = (swiper: any) => {
+    if(swiper.navigation && swiper.navigation.nextEl) {
+      swiper.navigation.nextEl.addEventListener('click', () => {
+
+        console.log('Swiper API를 통해 감지된 다음 버튼 클릭!');
+        
+      });
+    }
+
+    if (swiper.navigation && swiper.navigation.prevEl) {
+      swiper.navigation.prevEl.addEventListener('click', () => {
+        console.log('Swiper API를 통해 감지된 이전 버튼 클릭!');
+      });
+    }
+  };
+
+
   return (
     <div className="App">
       <MovingStars/>
@@ -100,10 +118,8 @@ function App() {
       {isWhiteScreenShow && (
         <div className='full-white-screen'>
           <div className='full-screen-content'>
-            {/* <h2>{selectedCard} Content Screen</h2>
-            <p>여기에 {selectedCard} 메뉴의 상세 내용을 자유롭게 디자인하시면 됩니다.</p> */}
 
-            {isProjectListShow && (<ProjectsGroup projects={projectList}/>)}
+            {isProjectListShow && (<ProjectsGroup projects={projectList} setProjectSelected={(result) => setProjectSelected(result)}/>)}
           </div>
         </div>
       )}
@@ -114,7 +130,7 @@ function App() {
 
       
       {/* ⭐️ Swiper 하단 중앙 캐러셀 */}
-      <div className="carousel-wrapper">
+      <div className={`carousel-wrapper ${isProjectSelected ? 'is-hidden' : ''} ${isRectanglesLeaving ? 'disable-touch' : ''}`}>
         <Swiper
           modules={[Navigation]} // 네비게이션(좌우 버튼) 모듈 장착
           navigation // 기본 좌우 화살표 활성화
@@ -126,6 +142,7 @@ function App() {
           onSliderMove={handleSliderMove}
           onTouchStart={() => { handleTouchStart(); }}
           onTouchEnd={() => { handleTouchEnd(); }}
+          onSwiper={handleSwiperInit}
           breakpoints={{
             // 반응형 레이아웃 설정
             480: { slidesPerView: 2 }, // 화면 폭 480px 이상일 때 2개

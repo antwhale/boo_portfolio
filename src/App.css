@@ -57,9 +57,11 @@ html, body {
 .preload-instructions {
   position: relative; /* 배경보다 위에 표시 */
   z-index: 10;
-  color: rgb(100, 100, 100);
-  padding-top: 10vh;
+  color: rgb(206, 206, 206);
+  padding-top: 25vh;
 }
+
+
 
 .App-logo {
   height: 40vmin;
@@ -99,17 +101,33 @@ html, body {
 /* ⭐️ Swiper 감싸는 컨테이너: 하단 중앙 배치 */
 .carousel-wrapper {
   position: absolute;
-  bottom: 0 !important;       /* 화면 아래에서 살짝 띄움 */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120vw;       /* 가로 비율 설정 */
+  bottom: 0 !important;      /* 화면 아래에서 살짝 띄움 */
+  left: 25%;
+  /* transform: translateX(-50%); */
+  width: 100vw;       /* 가로 비율 설정 */
   max-width: 1000px;  /* 최대 크기 제한 */
   z-index: 30;
-  padding: 0 40px;   /* 좌우 화살표 버튼이 들어갈 공간 확보 */
   box-sizing: border-box;
   backdrop-filter: blur(20px);
   border-radius: 16px 16px 0px 0px;
+
+  /* 부드러운 하강 인터랙션을 위한 트랜지션 설정 */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+  opacity: 1;
 }
+
+.carousel-wrapper.is-hidden {
+  /* 기존 X축 위치(0)를 그대로 유지한 상태에서 Y축만 아래로 120% 밀어냅니다.
+    이로 인해 대각선으로 비틀어지지 않고 수직으로 곧장 내려갑니다. */
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none; /* 숨겨진 상태에서 마우스 조작 방지 */
+}
+
+.carousel-wrapper.disable-touch {
+  pointer-events: none !important;
+}
+
 
 /* Swiper 컴포넌트 자체 커스텀 */
 .mySwiper {
@@ -143,6 +161,7 @@ html, body {
 .mySwiper:hover {
   background: rgba(255, 255, 255, 0.12); /* 반투명 흰색 배경 채우기 */
   backdrop-filter: blur(20px);           /* blur 처리 */
+
 }
 
 /* 개별 카드 스타일 */
@@ -156,8 +175,6 @@ html, body {
   align-items: center;
   transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease;
   cursor: pointer;
-
-  /* ⭐️ 평소에는 텍스트 색상을 희미하게 만듦 (투명도 0.4) */
   color: rgba(255, 255, 255, 0.15);
 }
 
@@ -181,78 +198,31 @@ html, body {
 .swiper-button-prev {
   color: #ffffff !important; /* 화살표 색상을 흰색으로 */
   transform: scale(0.6);     /* 화살표 크기 살짝 줄임 */
+  opacity: 0;     /*투명하게 만들기*/
+  transition: opacity 0.3s ease; /* 나타나고 사라질 때 부드러운 애니메이션 효과 */
 }
 
 /* 화살표가 카드 영역 밖 좌우 끝에 이쁘게 걸치도록 위치 미세조정 */
-.swiper-button-next { right: 0px !important; }
-.swiper-button-prev { left: 0px !important; }
+.swiper-button-next { 
+  right: 0px !important; 
+  pointer-events: none !important;
+}
+.swiper-button-prev { 
+  left: 0px !important; 
+  pointer-events: none !important;
 
-/* ⭐️ New Screen (Modal) Overly Styles */
-
-/* 1. Full-screen darkening background overlay */
-.modal-overlay {
-  position: fixed; /* Fixed position relative to viewport */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75); /* Dark semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Center content vertically and horizontally */
-  z-index: 1000; /* Ensure it is above EVERYTHING else */
-  opacity: 0;
-  animation: fadeInOverlay 0.4s ease forwards; /* Smooth fade-in animation */
 }
 
-/* 2. Main modal content box */
-.modal-content {
-  position: relative;
-  width: 80%;
-  max-width: 600px; /* Limit maximum width */
-  max-height: 80vh; /* Limit maximum height */
-  background: rgba(20, 20, 30, 0.9); /* Dark background matching theme */
-  backdrop-filter: blur(15px); /* Trendy glassmorphism effect */
-  color: white;
-  border-radius: 20px;
-  padding: 40px;
-  box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deep shadow */
-  overflow-y: auto; /* Enable vertical scroll for content if needed */
-  
-  transform: translateY(30px);
-  animation: slideInContent 0.4s ease forwards 0.1s; /* Slide-in from below */
+.swiper-button-disabled {
+  opacity: 0 !important;
 }
 
-/* Container for actual content within the modal */
-.modal-inner {
-    text-align: left;
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
+  opacity: 1; /* 불투명하게 만들어 표시 */
 }
 
-.modal-inner h2 {
-    font-size: 2rem;
-    margin-top: 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 10px;
-}
-
-.modal-inner p strong {
-    color: #ffd700; /* Gold color for highlighting selected card name */
-}
-
-.placeholder-content {
-    margin-top: 30px;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-}
-
-/* 3. Modal close button (top-right '×') */
+/*  close button (top-right '×') */
 .close-button {
   position: absolute;
   top: 15px;
@@ -260,7 +230,7 @@ html, body {
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.6);
-  font-size: 2rem;
+  font-size: 1rem;
   line-height: 1;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
@@ -609,4 +579,47 @@ html, body {
     opacity: 1;
     transform: scaleX(1);
   }
+}
+
+/* Swiper를 감싸는 래퍼 클래스 */
+.project-swiper-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ⭐️ Swiper 내부 네비게이션 버튼 & 페이지네이션 스타일 커스텀 (scale 2배 보정) */
+.project-swiper-container .swiper-button-next {
+  right: -10px !important;
+  color: #ffffff !important;
+  /* 부모 가 scale(2) 상태이므로 화살표 크기를 상대적으로 축소 제어 */
+  transform: scale(0.5); 
+}
+.project-swiper-container .swiper-button-prev {
+  left: -10px !important;
+  color: #ffffff !important;
+  /* 부모 가 scale(2) 상태이므로 화살표 크기를 상대적으로 축소 제어 */
+  transform: scale(0.5); 
+}
+
+.project-swiper-container .swiper-button-next::after,
+.project-swiper-container .swiper-button-prev::after {
+  font-size: 24px !important; /* 화살표 뼈대 크기 최적화 */
+}
+
+/* 하단 페이지네이션 점 크기 보정 */
+.project-swiper-container .swiper-pagination-bullet {
+  width: 4px !important;
+  height: 4px !important;
+  background: #a8a8a8 !important;
+  opacity: 0.4;
+}
+
+.project-swiper-container .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #ffffff !important;
 }

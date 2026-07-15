@@ -85,7 +85,7 @@ export const androidProjects: ProjectInfo[] = [
     appDescription: "㈜에이스인스트루먼트의 모델 5481 디지털 수직, 수평 경사계를 운용하는 전용 앱",
     userCnt: 1000,
     workHistory: "블루투스를 이용하여 디지털 수직, 수평 경사계로 측정 데이터 수집(RxBle)\n" +
-        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기, MediaStore로 공유저장소에 측정파일 저장\n" +
+        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기\n MediaStore로 공유저장소에 측정파일 저장\n" +
         "측정 데이터 그래프로 나타내기(MPAndroidChart)\n" +
         "측정 파일 이메일로 보내기 기능 개발",
     stacks: "RxBle, RxJava, MediaStore, File API, JAVA, SAF, MPAndroid",
@@ -105,7 +105,7 @@ export const androidProjects: ProjectInfo[] = [
     appDescription: "㈜에이스인스트루먼트의 모델 5411 디지털 경사계를 운용하는 전용 앱",
     userCnt: 1000,
     workHistory: "블루투스를 이용하여 디지털 경사계로 측정 데이터 수집(RxBle)\n" +
-        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기, MediaStore로 공유저장소에 측정파일 저장\n" +
+        "SAF(Storage Access Framework)로 공유 저장소의 측정파일 가져오기\n MediaStore로 공유저장소에 측정파일 저장\n" +
         "측정 데이터 그래프로 나타내기(MPAndroidChart)\n" +
         "측정 파일 이메일로 보내기 기능 개발",
     stacks: "RxBle, RxJava, MediaStore, File API, JAVA, SAF, MPAndroid",

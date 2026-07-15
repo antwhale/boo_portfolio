@@ -45,8 +45,7 @@ const RandomRectangles: React.FC<RandomRectanglesProps> = ({ triggerKey, transla
         const randomRatio = ratios[Math.floor(Math.random() * ratios.length)];
         const height = width * randomRatio;
 
-        //0.4에서 1.6 사이의 무작위 속도 가중치를 부여합니다.
-        // 1보다 작으면 느리게 움직여서 멀리 있는 느낌을, 1보다 크면 빠르게 움직여서 가까이 있는 느낌을 줍니다.
+        // 0.4에서 1.6 사이의 무작위 속도 가중치를 부여합니다.
         const speed = Math.random() * 1.2 + 0.4;
 
         // 각 구역 내부에서만 살짝 어긋나게(Jittering) 배치하여 고른 분포 유도
@@ -56,8 +55,8 @@ const RandomRectangles: React.FC<RandomRectanglesProps> = ({ triggerKey, transla
 
         newRects.push({
           id: index,
-          top: Math.min(top, 70),  // 세로로 길어졌을 때 하단 화면 탈출 방지
-          left, 
+          top: Math.min(top, 70), // 세로로 길어졌을 때 하단 화면 탈출 방지
+          left,
           width,
           height,
           delay,

@@ -2,10 +2,16 @@ import React, { useState, useRef,  } from 'react';
 import { ProjectInfo } from '../const/project_info';
 import frameV from '../assets/image-frame-v.png';
 import frameH from '../assets/image-frame-h.png';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface ProjectsGroupProps {
   projects: ProjectInfo[];
+  setProjectSelected: (result: boolean) => void
 }
 
 // ⭐️ 드래그 상태를 추적하기 위한 인터페이스
@@ -17,7 +23,7 @@ interface DragState {
   startTop: number;
 }
 
-const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
+const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects, setProjectSelected }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<DragState | null>(null);
   const isMovedRef = useRef<boolean>(false);    //드래그 이동 여부를 기록하는 독립적인 플래그 ref 생성
@@ -28,7 +34,7 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
   //  각 카드의 실시간 위치(px 또는 %)를 관리하기 위한 상태 변수
   // 초기 렌더링 시 계산된 값을 보관하고, 드래그 시 이 값을 변경합니다.
   const [positions, setPositions] = useState<{ [key: number]: { top: number; left: number, zIndex: number  } }>(() => {
-    const initialPositions: { [key: number]: { top: number; left: number, zIndex: number } } = {};
+  const initialPositions: { [key: number]: { top: number; left: number, zIndex: number } } = {};
     
     projects.forEach((_, index) => {
       const zone = Math.floor(Math.random() * 3); 
@@ -142,8 +148,10 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
     // 이미 켜져있는 걸 누르면 끄고, 아니면 해당 인덱스로 확대 지정
     if (expandedIdx === index) {
       setExpandedIdx(null);
+      setProjectSelected(false);
     } else {
       setExpandedIdx(index);
+      setProjectSelected(true);
     }
     dragRef.current = null;
   };
@@ -152,26 +160,40 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
     return <div className="no-projects">등록된 프로젝트가 없습니다.</div>;
   }
 
+  const handleClickBackdrop = () => {
+    setExpandedIdx(null);
+    setProjectSelected(false);
+  };
+
   return (
     <div className="projects-random-container" ref={containerRef}>
       {/*  배경 레이어 클릭 시 확대 모드 해제 */}
       {expandedIdx !== null && (
-        <div className="expanded-backdrop" onClick={() => setExpandedIdx(null)} />
+        <div className="expanded-backdrop" onClick={ handleClickBackdrop } >
+          <span className='close-button'>X EXIT THE SCREEN</span>
+        </div>          
       )}
 
-        {projects.map((project, index) => {
-          // ⭐️  images 배열의 첫 번째 이미지를 추출합니다. (없을 경우를 대비한 Fallback 처리)
-          const representImage = project.images && project.images.length > 0 
-            ? project.images[0] 
-            : 'https://via.placeholder.com/400x300?text=No+Image'; // 대체 이미지
+      {projects.map((project, index) => {
+        // ⭐️  images 배열의 첫 번째 이미지를 추출합니다. (없을 경우를 대비한 Fallback 처리)
+        const representImage = project.images && project.images.length > 0 
+          ? project.images[0] 
+          : 'https://via.placeholder.com/400x300?text=No+Image'; // 대체 이미지
 
-          // 해당 인덱스의 고유 실시간 좌표값 꺼내기
+        // 해당 인덱스의 고유 실시간 좌표값 꺼내기
         const pos = positions[index] || { top: 50, left: 50, zIndex: 20 };
         // const randomZIndex = Math.floor(Math.random() * 10) + 1;
         const aspectRatio = project.imageDirection === 'v' ? '2 / 3' : '3 / 2';
         const frameImageUrl = project.imageDirection === 'v' ? frameV : frameH;
 
         const isExpanded = expandedIdx === index;
+
+        // 이미지 배열 유효성 체크 및 폴백 설정
+        const projectImages = project.images && project.images.length > 0 
+          ? project.images 
+          : ['https://via.placeholder.com/400x300?text=No+Image'];
+
+        const transform = project.imageDirection == 'v' ? 'translate(-50%, -50%) scale(1.8)' : 'translate(-50%, -50%) scale(2.2)';
 
         return (
           <div key={`${project.title}-${index}`} 
@@ -180,7 +202,7 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
             top: isExpanded ? '50%' : `${pos.top}%`,
             left: isExpanded ? '30%' : `${pos.left}%`,
             zIndex: isExpanded ? 999 : pos.zIndex,
-            transform: isExpanded ? 'translate(-50%, -50%) scale(2)' : 'none',
+            transform: isExpanded ? transform : 'none',
             cursor: isExpanded ? 'default' : 'grab'
           }}
           onMouseDown={(e) => handleDragStart(e, index)}
@@ -197,14 +219,46 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects }) => {
                 backgroundImage: `url('${frameImageUrl}')`
               } as React.CSSProperties}
               >
-                <img 
-                  src={representImage} 
-                  alt={`${project.title} 대표 이미지`} 
-                  className="project-represent-img"
-                  loading="lazy" // 성능 최적화를 위한 지연 로딩
-                  width={project.imageDirection === 'v' ? '60%' : '80%'}
-                  draggable='false'
-                />
+
+                {!isExpanded ? (
+                  <img 
+                    src={representImage} 
+                    alt={`${project.title} 대표 이미지`} 
+                    className="project-represent-img"
+                    loading="lazy" // 성능 최적화를 위한 지연 로딩
+                    width={project.imageDirection === 'v' ? '60%' : '80%'}
+                    draggable='false'
+                  />
+                ) : (
+                  // ⭐️ 클릭해서 2배 확대(isExpanded)되었을 때만 Swiper 가동
+                  // Swiper 내부 클릭 시 프레임이 닫히는 버그 방지를 위해 onClick 캡처 처리
+                  <div className="project-swiper-container" onClick={(e) => e.stopPropagation()}>
+                    <Swiper
+                      modules={[Navigation, Pagination]}
+                      spaceBetween={0}
+                      slidesPerView={1}
+                      navigation={true}
+                      pagination={{ clickable: true }}
+                      loop={projectImages.length > 1}
+                      style={{ width: '100%', height: '100%' }}
+                    >
+                      {projectImages.map((imgUrl, imgIdx) => (
+                        <SwiperSlide key={imgIdx} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                          <img 
+                            src={imgUrl} 
+                            alt={`${project.title} 이미지 ${imgIdx + 1}`} 
+                            className="project-represent-img"
+                            width={project.imageDirection === 'v' ? '60%' : '80%'}
+                            style={{ objectFit: 'contain' }}
+                            draggable='false'
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                )}
+
+                
               </div>
 
               {/* ⭐️ [핵심 추가] 2배 커졌을 때 오른쪽에 노출할 상세 텍스트 패널 */}
