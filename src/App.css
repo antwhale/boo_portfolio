@@ -194,8 +194,8 @@ html, body {
 
 
 /* ⭐️ Swiper 내장 내비게이션 버튼 커스텀 스타일 */
-.swiper-button-next,
-.swiper-button-prev {
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
   color: #ffffff !important; /* 화살표 색상을 흰색으로 */
   transform: scale(0.6);     /* 화살표 크기 살짝 줄임 */
   opacity: 0;     /*투명하게 만들기*/
@@ -203,17 +203,17 @@ html, body {
 }
 
 /* 화살표가 카드 영역 밖 좌우 끝에 이쁘게 걸치도록 위치 미세조정 */
-.swiper-button-next { 
+.mySwiper .swiper-button-next { 
   right: 0px !important; 
   pointer-events: none !important;
 }
-.swiper-button-prev { 
+.mySwiper .swiper-button-prev { 
   left: 0px !important; 
   pointer-events: none !important;
 
 }
 
-.swiper-button-disabled {
+.mySwiper .swiper-button-disabled {
   opacity: 0 !important;
 }
 
@@ -503,6 +503,18 @@ html, body {
   transform-origin: left;
 }
 
+.project-expanded-detail.v h3 {
+  font-size: 12px;
+}
+
+.project-expanded-detail.v span {
+  font-size: 7px;
+}
+
+.project-expanded-detail.v p {
+  font-size: 8px;
+}
+
 /* 상세 보기 내부 폰트 스타일링 (정밀 축소 반영 - 2배 커지기 때문에 폰트는 작게 세팅) */
 .detail-title {
   margin: 0;
@@ -535,11 +547,20 @@ html, body {
   margin-top: 2px;
 }
 
+.detail-section.v h4 {
+  font-size: 9px;
+}
+
 .detail-section h4 {
   margin: 0;
   font-size: 7px;
   color: #f3f3f3;
   font-weight: 600;
+}
+
+
+.detail-section.v p {
+  font-size: 8px;
 }
 
 .detail-section p {
@@ -548,6 +569,10 @@ html, body {
   color: #e4e4e4;
 
   white-space: pre-line;
+}
+
+.detail-section.v span {
+  font-size: 6.5px;
 }
 
 .detail-stacks {

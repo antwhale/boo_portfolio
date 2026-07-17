@@ -230,7 +230,7 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects, setProjectSelec
                     draggable='false'
                   />
                 ) : (
-                  // ⭐️ 클릭해서 2배 확대(isExpanded)되었을 때만 Swiper 가동
+                  // ⭐️ 클릭해서 x배 확대(isExpanded)되었을 때만 Swiper 가동
                   // Swiper 내부 클릭 시 프레임이 닫히는 버그 방지를 위해 onClick 캡처 처리
                   <div className="project-swiper-container" onClick={(e) => e.stopPropagation()}>
                     <Swiper
@@ -261,28 +261,28 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects, setProjectSelec
                 
               </div>
 
-              {/* ⭐️ [핵심 추가] 2배 커졌을 때 오른쪽에 노출할 상세 텍스트 패널 */}
+              {/* ⭐️ [핵심 추가] x배 커졌을 때 오른쪽에 노출할 상세 텍스트 패널 */}
               {isExpanded && (
-                <div className="project-expanded-detail" onClick={(e) => e.stopPropagation()}>
+                <div className={`project-expanded-detail ${project.imageDirection}`} onClick={(e) => e.stopPropagation()}>
                   <h3 className="detail-title">{project.title}</h3>
                   <span className="detail-type-tag">{project.type}</span>
                   <p className="detail-description">{project.appDescription}</p>
                   
                   {project.workHistory && (
-                    <div className="detail-section">
-                      <h4>📊 작업 내역</h4>
+                    <div className={`detail-section ${project.imageDirection}`}>
+                      <h4>📊 작업 내역 ({project.workDuration})</h4>
                       <p>{project.workHistory}</p>
                     </div>
                   )}
 
                   {project.userCnt > 0 && (
-                    <div className="detail-section">
+                    <div className={`detail-section ${project.imageDirection}`}>
                       <h4>👥 이용자 수</h4>
                       <p>{project.userCnt.toLocaleString()}명 이용 중</p>
                     </div>
                   )}
 
-                  <div className="detail-section">
+                  <div className={`detail-section ${project.imageDirection}`}>
                     <h4>🛠️ 사용 기술 스택</h4>
                     <div className="detail-stacks">
                       {project.stacks.split(',').map((stack, sIdx) => (

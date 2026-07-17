@@ -159,9 +159,9 @@ export const androidProjects: ProjectInfo[] = [
     stacks: "Compose, Hilt, Navigation, MVVM, Retrofit2, Coil, Datastore, CameraX, LLM",
     workDuration: "2023.10 ~ 2024.10",
     images: [
-      "https://blogger.googleusercontent.com/img/a/AVvXsEjjmgw2ed341i5LeZnKtbB-XZtIWZyqOleAV9H-Df2vq8P4JFbYaIt2DcdFimuj7bADqRsm69E61cYp51lyjhlK2_dgElAG2n5hzQNOLXFcg8sLgzRUecYvpwcPDaJ29UmKjmUX7sNozFQTd7iwSGe7FJ_Rz0Qd8z6rI0vXe3wqHFBEiS60A5ZDH2F9-xY",
-      "https://blogger.googleusercontent.com/img/a/AVvXsEgkbPbkSINxyaSSQlqUJarpOC1S0sacyhrmigMuqyOX_IdbekHvt81JosyA7g7fTUijKwxPvJpWRIM0D1Wzmou_PjyIg9td02KuRZ_TI3una4fMZmKhGHZ0IYGRGCBrqDzROJ36s7thld21PeNP8yYECYZj4YmfyAVz6EB9E2k8mxOoseYHOYIHA2__rcE",
-      "https://blogger.googleusercontent.com/img/a/AVvXsEgwLtKnuxkM2S2u33O4V_HxU9o00fYNaoc01AU951mGqmvbvu2V-cFBbAwLRJYpDKYMhYUUZSIIcjlaxPrP9q-c8GNpfNqgR7eOMPpnfj26J7UzESkJJAauThMfkFIEskojcRdSncmh7_8A9xeUYb7nM28d3fQ24H2_BtVyZQoPq9C3XccT4gyqTmhybOk",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEg_o-0bTmy5soj_ulC497PgDlEsMsVKB0W167FK1Oe25dbFP3TI1yxBXZIW2Vu88h3Rl3u404kF4P2IEdmvDUEhoDsN6Hr3TuDA92EmeaooQenKxva9XIDp7A8nRlf8N3f_CvICJQNZJyDaaMVayKa5DlRIwpuJPxCaMPG3LIQ98YdgZGbtn948_pdmpVw",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEhZIRl9mVy0c6XY1lIaiU60UV9CfrnZF7x8N9A6RBLsSO0vhujWwglArAb-tSEiES-gPM8t25WyZnYX3IuFrgGm2hIYGupce6OFWKvUd6Tkba2xpYySDaPYbR0kAutrrq2hYw8DjTrRgqcOG9ldfXcVf2xBwjZ1DGDfkmPFiuRBDw9Wh_y4sd-Lfl5KmdU",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEj165YIKABz806iKw-HOmhzyC63KpGi24nL9eu_mjzltGUTIKe39PqZD_PDdzsM00YGiB-DgjGnFzI0xiuG3b_JPZkjJKsya0jL5naLtjrztcZJjQK8JpSNjfZE81zpJprPGANtawgv-exAdtH_yNlaOvDtbbbLr7W4llpldZWs4QXWimXHjOgfXOsY8WI",
     ],
     imageDirection:"v"
   },
@@ -183,6 +183,9 @@ export const androidProjects: ProjectInfo[] = [
       "https://blogger.googleusercontent.com/img/a/AVvXsEhV2Gegh9LBeP17fpJZR71662Gqcbw8mLZtCqhiCuPvQVJk-JlmDxve12bBt19CAnJTXLnO9yQhREatdfTaCHtC-qlhSHZY1vULqt2-GQ4Vzb8WHx8tkUDtc4dwxsu9njganBQpjP15EozFr_kJFv7Ca_WhPENOqCVhqD53wI7mTdka4zl_dJ0jVfLA9Cs",
       "https://blogger.googleusercontent.com/img/a/AVvXsEjPTAAliHgYspRqv152CaRy1O0XgfX8wVqoZ9HRjECAimVOLzDL5G_ixhxEDR6PjlJuZth2xoGR8cHSsSecGyvxJ2tUtnzVjEvYP6g746wv5JBWaZJMMtc0f4U0mBYZ46K58hxoQST2XkJ2CXz1diazpxBe7EoiGTwtiGqjdpNpjml65Z-lDZbSXv0lPrY",
       "https://blogger.googleusercontent.com/img/a/AVvXsEhXBRXXYYj2GYXXnyB0grYILItjZ4absXbaPjFrFwmR5WSrgx-UHP6jDOCg6sWsaOSHGps5VhSFmBXYmseTjh5A8BAmAKMx8u17XGAAKQkNKtjrfecWrJ8qY6hM1N44x-goxFayp-xr2AMU0fcXdYf6b2hb5rRXaifm4pAjrAErgTz2mvR8KXmTW4NcKD8",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEj5g70X1Iw_RO1VxwMsj9pTaQFh1H0tv-gxSe3YiKWMOQSNFf_vKbu8aFUQT-D28EbYK9kSz9rCUbkumJ3y0Y_CuebexINfgPe-433RcX3zN2Z9slA5b1uoh9Sa9K_CTCUfnvbMlPZsxPOQN7QsHC4ztp1xX9KfiQDWTgk0eNluEuvuyKCD0vZm5oE455M",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEjCcgwwWl8xtLp8u9nI8Rqkn6V3N6SZMHTWOGWWG8Cycn2dlTpgr_8HaalzT7nQ2thJpeyiEUeu4JGjT4bhrg85Gq8FckcZ_rMeb9fq8RCQ7B88UCQBtARbgrqgVIGc9xuj42MFwki5Pk8zqrjLesCF6jQk0JRXXd7fvuf3cnClhILGDdnZojffXGFMs50",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEgORjAi1rB22Ky9_yWt-_Z70jyVffbviTTgr76QR5Q1MvucGRbTlueiislm7oFEeayC6ECqvJPSmLocegbYRfuDXym5mpw042F689B88RhYAgbxp7jWzF8lYv0ODZkFyItOlCv0IBeVZZFIiv3zb83n78oAzJOyrY29yiDF8KPvv-KoEyDZa_W3lzuswus",
     ],
     imageDirection:"h"
   },
@@ -199,9 +202,10 @@ export const androidProjects: ProjectInfo[] = [
     stacks: "Compose, Coroutine, Flow, Coil, MediaSession, MAOS",
     workDuration: "2025.02 ~ 2026.02",
     images: [
-      "https://blogger.googleusercontent.com/img/a/AVvXsEi33vpq2FiRX4wYxnfubZBVR8-dlmPRocRCvcRztkrnBXjL57fhbBqReYT8zJVe3RuZ8FSVp3eGHBh9_E5fTiePbKVsOGK1YkbiuHqNkPtO5KREMzgl5VphZFcTccoVnPv-KCBCN_83GWWAqBa3rjZTgnzo4pDwJKvo6P6xdJrfKjvF-qxdWpFu_hFH1tg",
-      "https://blogger.googleusercontent.com/img/a/AVvXsEjPTAAliHgYspRqv152CaRy1O0XgfX8wVqoZ9HRjECAimVOLzDL5G_ixhxEDR6PjlJuZth2xoGR8cHSsSecGyvxJ2tUtnzVjEvYP6g746wv5JBWaZJMMtc0f4U0mBYZ46K58hxoQST2XkJ2CXz1diazpxBe7EoiGTwtiGqjdpNpjml65Z-lDZbSXv0lPrY",
-      "https://blogger.googleusercontent.com/img/a/AVvXsEhXBRXXYYj2GYXXnyB0grYILItjZ4absXbaPjFrFwmR5WSrgx-UHP6jDOCg6sWsaOSHGps5VhSFmBXYmseTjh5A8BAmAKMx8u17XGAAKQkNKtjrfecWrJ8qY6hM1N44x-goxFayp-xr2AMU0fcXdYf6b2hb5rRXaifm4pAjrAErgTz2mvR8KXmTW4NcKD8",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEg_IhlJKe1Xtae1WKqNij3_pvvXCbD0UvciS_o8U_aLflTz7FTIywLYD5XkB31h5bL6C4r0J8o2ZAro6ZUDsAxupGvezFgqgoc-zX1bVhKEK63BSY6QbK1Vi_Nsy58y8Ql3057dn9M62D992m_7GBoRzpVPlB_Mf80ovnJnMterr5e-PheiTzFe1inbGQw",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEgtXPcyYp7U2-rtxuM24tpVcAxwudjgaZZSL7r-MNAUCZ08B6CXAxVXd9akC6G5tADcKElvZ0PjUGaz7YV0d19iz20VaKHEE406nZ99Mg43UEWwi8acq3v5mEkNJGWuPbupdgGHSTGZTlBwWXChjJjUxoJ-OtXE6EO2nxRFgwFifB2xq84pJKoTs6qPglU",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEhyUB4DAwiaLw7627nEK_HCN7XFzsQ5zjGagwiFyfSuuRDtEIeyTmEAMPKZMIOuSrmSc1hB41TqiaIJUefkZrFH4WPwWxi9xY6L0IobKWqsNOqC86AjIMfEnITLktO5OxEvvQLSmOKsJzcPg359qblfIyshpWkH5igQYGmlgANAWr1nO3i7X5JdSPYFKts",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEjA-zqmmnPjLkIa78fNnJKAbSOVMbFDmvlMC3H91qsemrVcjU15sNnVjjPLmjqC9kyVcVuCFO9_tDf2rJJkDCuuuK9W4U4355-Ov-OSfOM78_Yx1HXTysYHuzhSxss2jJmSkl4riEEveuSsDvxU7vrvNVySis5MbfyDcZNgTIxXDbh5_OEViAHt7rVjVKI",
     ],
     imageDirection:"h"
   },
@@ -261,13 +265,12 @@ export const reactNativeProjects : ProjectInfo[] = [
             "좋아요 기능 구현\n" +
             "다국어 서비스 제공(한국어, 일본어, 영어)\n" +
             "애드몹 구현\n",
-        stacks: "JavaScript, ReactNative, TypeScript, i18n, Admob, Expo, Selenium, React",
+        stacks: "JavaScript, ReactNative, TypeScript, i18n, Admob, Expo, Selenium, React, Sqlite",
         workDuration: "2026.01 ~ 2023.02",
         images: [
-            "https://blogger.googleusercontent.com/img/a/AVvXsEh02sePnKGrmqbMXeO9Nub_D5CXU6SE8uFLimuRaF8P4SK7o4zV9ilBZB_HlmWGFTXhdDy9MdiZrJn6dIC6GqjNhbNTkD2QTUA4UyUgOZ2ucTRbOmjhzSYFsA3qXAFFzhVUFda5i9rSOncIUSyQOrM_UrwTLdPmxwNIlouSnC_oOJpjx7rjPDY5iTzWxFo",
-            "https://blogger.googleusercontent.com/img/a/AVvXsEjr_vus7aPrKKQdvyCg0Ykb07-BLwqpKK37SDG_tmNlQXW0rBlv3EkzlkW-rww7dxP69s1LZd4puWW3be_39aJ2_rBvXLQZ-SH3xI1ZZRBxVvWRkdAoqUPKcMi3NuHuFakdDrKh-vYBqMjfXhXsZdbnMT1kf__DNyt4kdpv3YELoXAxzz_xNu8xLbQt798",
-            "https://blogger.googleusercontent.com/img/a/AVvXsEioEPisX1vPd0BHb6Qf09idPEy6utq4FKFh_OJlSqxKoHZOBpcq2BM7u1p7Up3f0CIAAeebi_nDjhTxhgESMvFRFKtPIrG3qWJLuvoV53r8t4yA78g8x9VgD9Py5maF9Hrluuz8cSjtQz3GWrCrnzpvdtoQzICa7rlVdRTKSrstDEylF0DbwcRfkeMLBqM",
-            "https://blogger.googleusercontent.com/img/a/AVvXsEgn-zmYuzfqF1CdL3s_mFzKIu4frlBxrAM7oGzCJn83pBry69NnRAjlLm0Qkd5NiYmrOzOmB4hDfKTdsh9CHH6dDSKQ9XgNKL2kHqHNDuVyQUOs6w6fzqN_APSWsw6OA_U-jf2S3x_UdRQC5E-d8Cqh1HPaajUvBy_74FGjZxxwwhh_JhQ818ujbyZYccg",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEgvYZ87ul97tMLA-Ad7v9QbUzbOzOzo0vgu1hX8MviaaDoaAyLLcAKqy7YAboN1ZtSC73m0rJo-QsaWtux5y5YQYmoE1sWCydSIjISGv7S24KEIcT4JJOuZ-gwqf1215zHNGxTgDl97B-gFftasIQ7Y9tLA8G5U34-K14EshByVFrioUJb49pYxJxVVdio",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEiAWJu1g1rfUvJ6yRQokNRaN9KAm9fBUVIUJFrX3i61geHqHRweeyTFZCMUOcYsWJXmjR1g9UxTWUxq6y-OSrbHGzMaAP1YvsD7RgZVOGYToCVz-OUXnJwfY8ad-wcupqcFQ7JLBgGMhlW4JzCCrMYs-iTEE3dIXiGqb-W0RrFtAaaBxyNcQfWv1sKdzgU",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEgXuz5RcCKUEOFuj0EU5GAcspbJKgQSJFEBWq80Z239Lbnb3v4ukPE2mcIMAtFlE_0-fxcM0ZLt7toIXNZuwRu7cdp_Ua8P8xDNMOx6wsalhn-DUJDM0jAAeTVZwOW6BPTaQJqWZafOyRzshu12NRj6xMVfycY6hTtqXp7JD0SrnQwvTLiRzrTZnSuzURo",
         ],
         imageDirection:"v"
     },
