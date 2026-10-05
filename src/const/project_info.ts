@@ -35,7 +35,7 @@ export const androidProjects: ProjectInfo[] = [
     userCnt: 20,
     workHistory: "ViewPager2를 이용하여 슬라이더 기능을 구현하고 CustomView의 다양한 attribute를 추가하여 사용자가 자유롭게 커스텀할 수 있도록 구현",
     stacks: "Kotlin, Android Studio, Glide, ViewPager2, CustomView",
-    workDuration: "2023.01 ~ 2023.02",
+    workDuration: "2023.01 ~ 2023.01",
     images: [
       "https://blogger.googleusercontent.com/img/a/AVvXsEiTI5s0XNCp1sF_NW1TwkxZEzU0Xl7uz77QxUKy_Rkw7h_8cOVxjv37YDfJ_fw8Aox-3MiZDMXHBLGYgr3Y1j8YdfmtmaGuyyZ-a4hYm4HuravNUaWXma5Gs4VEup7x2zoOC1Rjz8flD_lb_sWAbgx9F9M0YbLTUygsmiseGXoAG-l3PnGTj_Z8NiucVzk"
     ],
@@ -119,13 +119,32 @@ export const androidProjects: ProjectInfo[] = [
     imageDirection:"v"
   },
   {
+    title: "트루닥 스캔",
+    type: "안드로이드 네이티브 앱(Kotlin)",
+    appDescription: "의료진이 모바일 기기로 환자 관련 문서와 사진을 촬영하여 병원 시스템에 실시간으로 업로드할 수 있는 병원 업무 효율화 앱",
+    userCnt: 100,
+    workHistory: "환자 접수 및 조회\n" +
+        "OpenCV를 활용한 병원 문서 스캔 및 업로드\n" +    
+        "갤러리 이미지 불러오기\n" + 
+        "로그인 기능\n",
+    stacks: "Kotlin, Retrofit2, Flow, OpenCV, File API, MVVM, Hilt, Navigation, CameraX, Coroutine, Glide, Paging3",
+    workDuration: "2023.01 ~ 2023.02",
+    images: [
+      "https://blogger.googleusercontent.com/img/a/AVvXsEhD9GF1Ms4_f9VnCvUFi_E42mgk4bV-aSPAzPLgu2HRaDbUrkvHA508uTABwQrPN5Z0LZQF_0RUGsWmPG8XUHIzKNuoXzzcF-ykAMPZwtprX6oNdGuYn8eA_TOl-4x6HqxQL7gv5Vhejw_HPOPnGsYawHAZh-v2xYLE_efmSUTIkM8GthSS6KbFIsUTaZc",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEgzmwgbpZoXPBejo3xnEwpXvgK2Zg-HrYXaZRe_73vOEf87Co_G0SLdawEsDOYP--6Wb5SKWjnPDc-lJiPpe_mVz0oCGSazoWA5BL9lhH0teur6xeAfMA-V4v8LU8F74cix-79qP1G8iPAoyWXnkNpkVsAo4sTJ8mEqOXE4rHShAkseKcIspPKQAUQiD_k",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEhYwr7S2sJWrGSH0u5wty6VvVt3A1W395kVhFVfhR4beCkoz3BxIFeGQoC9jG1pMkgoo1j-kb6w-7cgUdFiaO2QpjyvV6619ZMy3c77sx6HH2JwyIN9H4kljj9t1wfv__8f-6qNbdooL_u3lONSlFFMMu2hEajIF6iUtlpgOHh5xexohPrhU0oD4Rx3lIo",
+      "https://blogger.googleusercontent.com/img/a/AVvXsEgM92NoHVpiyhOuF92hzGQ6mAR5RIWQc1UjMcgOBJso6Rd4iT8it5I1vqKmOlaxnEBaBCGxlGkwjSarNxN3SBaTNQE52i_2fknplT9iabDYQ49Uqs5cZ374aj_POjRpOSa_Wis2fY73e80AmGYlVv9eM057yWozT5YfA6LTQvzgj0Yts39uHCPJ9iHvHHw",
+    ],
+    imageDirection:"v"
+  },
+  {
     title: "현대모비스 지니뮤직과 멜론뮤직",
     type: "안드로이드 네이티브(JAVA)",
     appDescription: "현대기아차에 탑재되는 표준형 5세대 뮤직스트리밍앱",
     userCnt: 5000000,
     workHistory: "버그 수정 / 기능 업그레이드 / 보안 업데이트",
-    stacks: "ExoPlayer, Handler, Thread, ListView, Glide, SQLite, AsyncTask, Service",
-    workDuration: "2024.05 ~ 2026.11",
+    stacks: "ExoPlayer, Handler, Thread, ListView, Glide, SQLite, AsyncTask, Service, AOSP, Linux",
+    workDuration: "2024.05 ~ 2025.11",
     images: [
       "https://blogger.googleusercontent.com/img/a/AVvXsEjdr-ozDze7JwAOy1DHVWG9WV9_JuMiOnRf_NtSDxglQOQjwinwsA5gjs8wHhFABwqCRHZEjeF4DecIB05Pjr0QD5T6vy1UamPDvTgbd3AcN-vnuQtLMbRhCKSPipIXQjX-bYDIaxugWxdsf2dpe67tFonOq0EdTHU0FUzcav8Gp1RQXOdEHFMApTAH7NQ",
       "https://blogger.googleusercontent.com/img/a/AVvXsEgG6RU_H7kPQQUXpU8B8_NA6SpdYhnKi_l_Fj3KkR8aXRciycqMo9R7E3l1Pck438t_g8jtEMK7dmMbcpXtSZFT9WMuO285M4cqNtbahigoKqKyXtOZvP01QxJ9tFejo3Ab-NSOq91_QoSSQ2L86N7UbRj4_R87hI4Zi_UiXBoOCEdItwiyKUKUH4z186U",
@@ -139,8 +158,8 @@ export const androidProjects: ProjectInfo[] = [
     appDescription: "현대기아차에 탑재되는 표준형 5세대 중국향 뮤직스트리밍앱",
     userCnt: 500000,
     workHistory: "버그 수정 / 기능 업그레이드 / 보안 업데이트",
-    stacks: "ExoPlayer, Volley, Thread, ListView, Glide, SQLite, AsyncTask, Service",
-    workDuration: "2024.05 ~ 2026.11",
+    stacks: "ExoPlayer, Volley, Thread, ListView, Glide, SQLite, AsyncTask, Service, AOSP, Linux",
+    workDuration: "2024.05 ~ 2025.11",
     images: [
       "https://blogger.googleusercontent.com/img/a/AVvXsEit4iiffL_ZJ1u8_6JatzK_t1QbAGf48IiiFxoVdHgaOzKbzvvIyPdvtkGZc_fFiTTFdw6CdIPq2x2SMNxz4zH8nLF3hWDWOof7yc5QST5tcXfaZzSnc06WuonHb3JCOIm9RcCzyLAzKxJ-YTJeVxCEeYCosIfrfrNcUFfq8LjKardhR9RH3SZJRQH6Q88",
       "https://blogger.googleusercontent.com/img/a/AVvXsEjaxQEUL08lOrTjlS8wm5ro6maSe-KZuH_04NBzgReOJJbCb3TcZRQt_hOIohbNe-m37qGeFZPT6EfEf1pUN8I1hn-Rq2W1r8hOGIbJNeICPEZPTBJ7aFplo_QU8qfe89mw_Dthhjad8732nTp3ZktMupG43Q8aWHSaIYKSWk1u8K9kR9ySneY04GhUBTI",
@@ -152,7 +171,7 @@ export const androidProjects: ProjectInfo[] = [
     title: "닥터왓슨",
     type: "안드로이드 네이티브 앱(Kotlin)",
     appDescription: "정부과제 앱: 경찰이 사건현장의 정보를 AI 활용하여 기록하는 앱",
-    userCnt: 500000,
+    userCnt: 0,
     workHistory: "LLM AI 모델 사용한 자동 사건 정보 작성 기능 구현\n" +
         "Compose 활용한 뷰 그리기\n" + 
         "네이버 STT 활용한 음성인식 구현",
@@ -169,7 +188,7 @@ export const androidProjects: ProjectInfo[] = [
     title: "현대모비스 AI Agent POC앱 (가칭: AIMO) ",
     type: "안드로이드 네이티브 앱(Kotlin)",
     appDescription: "실서비스를 위한 POC 과정의 AI Agent 앱 개발 + 2026 CES 전시",
-    userCnt: 0,
+    userCnt: 5000000,
     workHistory: "차량 매뉴얼 / DTC코드 / 자동차 정비 매뉴얼 등의 사전 지식 학습 데이터로 LLM을 활용한 질의-응답 대화형 서비스 구현\n" +
         "Bge-M3 임베딩 모델과 VectorDB(ObjectBox) 활용하여 RAG 기능 구현\n" +    
         "자동차 현재 상태, 사용자의 서비스 습관 등의 이벤트를 수집하여 사용자 맞춤형 서비스를 제공하는 AI 비서 기능 구현\n" + 
@@ -178,7 +197,7 @@ export const androidProjects: ProjectInfo[] = [
         "운전자의 데이터를 분석하여 차량 온도, 내비게이션, 드라이빙모드 변경 추천 기능 구현\n" +
         "유니티를 사용하여 3D 아바타 구현",
     stacks: "STT, TTS, MAOS, ONNX, HuggingFace Tokenizer, ObjectBox, DJL, Lottie, Unity",
-    workDuration: "2026.07 ~ 2026.12",
+    workDuration: "2025.07 ~ 2025.12",
     images: [
       "https://blogger.googleusercontent.com/img/a/AVvXsEhV2Gegh9LBeP17fpJZR71662Gqcbw8mLZtCqhiCuPvQVJk-JlmDxve12bBt19CAnJTXLnO9yQhREatdfTaCHtC-qlhSHZY1vULqt2-GQ4Vzb8WHx8tkUDtc4dwxsu9njganBQpjP15EozFr_kJFv7Ca_WhPENOqCVhqD53wI7mTdka4zl_dJ0jVfLA9Cs",
       "https://blogger.googleusercontent.com/img/a/AVvXsEjPTAAliHgYspRqv152CaRy1O0XgfX8wVqoZ9HRjECAimVOLzDL5G_ixhxEDR6PjlJuZth2xoGR8cHSsSecGyvxJ2tUtnzVjEvYP6g746wv5JBWaZJMMtc0f4U0mBYZ46K58hxoQST2XkJ2CXz1diazpxBe7EoiGTwtiGqjdpNpjml65Z-lDZbSXv0lPrY",
@@ -193,14 +212,14 @@ export const androidProjects: ProjectInfo[] = [
     title: "현대모비스 PBV 미니플레이어",
     type: "안드로이드 네이티브 앱(Kotlin)",
     appDescription: "현재 재생중인 미디어앱의 정보를 보여주고 간단한 조작을 가능하게하는 미니플레이어 앱입니다.",
-    userCnt: 0,
+    userCnt: 1000000,
     workHistory: "Compose를 사용하여 FloatingView UI개발\n" +
         "미디어 세션을 사용하여 현재 재생되는 미디어 정보 추출\n" +    
         "PBV 하드키로 미디어 기능 조작할 수 있는 편리한 Interface 구현\n" + 
         "Compose 활용한 애니메이션 기능 구현\n" + 
         "MADI 활용하여 CleanArchitecture 구현",
     stacks: "Compose, Coroutine, Flow, Coil, MediaSession, MAOS",
-    workDuration: "2025.02 ~ 2026.02",
+    workDuration: "2025.01 ~ 2025.07",
     images: [
       "https://blogger.googleusercontent.com/img/a/AVvXsEg_IhlJKe1Xtae1WKqNij3_pvvXCbD0UvciS_o8U_aLflTz7FTIywLYD5XkB31h5bL6C4r0J8o2ZAro6ZUDsAxupGvezFgqgoc-zX1bVhKEK63BSY6QbK1Vi_Nsy58y8Ql3057dn9M62D992m_7GBoRzpVPlB_Mf80ovnJnMterr5e-PheiTzFe1inbGQw",
       "https://blogger.googleusercontent.com/img/a/AVvXsEgtXPcyYp7U2-rtxuM24tpVcAxwudjgaZZSL7r-MNAUCZ08B6CXAxVXd9akC6G5tADcKElvZ0PjUGaz7YV0d19iz20VaKHEE406nZ99Mg43UEWwi8acq3v5mEkNJGWuPbupdgGHSTGZTlBwWXChjJjUxoJ-OtXE6EO2nxRFgwFifB2xq84pJKoTs6qPglU",
@@ -221,7 +240,7 @@ export const iosProjects: ProjectInfo[] = [
             "FileManager 측정파일 가져오기 및 저장\n" +
             "측정 데이터 그래프로 나타내기\n" +
             "측정 파일 이메일로 보내기 기능 개발",
-        stacks: "CoreBluetooth, FileManager, Charts, Swift",
+        stacks: "CoreBluetooth, FileManager, Charts, Swift, Alamofire, AutoLayout, MVVM, RxSwift, RxCocoa",
         workDuration: "2023.03 ~ 2023.05",
         images: [
             "https://blogger.googleusercontent.com/img/a/AVvXsEh02sePnKGrmqbMXeO9Nub_D5CXU6SE8uFLimuRaF8P4SK7o4zV9ilBZB_HlmWGFTXhdDy9MdiZrJn6dIC6GqjNhbNTkD2QTUA4UyUgOZ2ucTRbOmjhzSYFsA3qXAFFzhVUFda5i9rSOncIUSyQOrM_UrwTLdPmxwNIlouSnC_oOJpjx7rjPDY5iTzWxFo",
@@ -241,7 +260,7 @@ export const iosProjects: ProjectInfo[] = [
             "FileManager 측정파일 가져오기 및 저장\n" +
             "측정 데이터 그래프로 나타내기\n" +
             "측정 파일 이메일로 보내기 기능 개발",
-        stacks: "CoreBluetooth, FileManager, Charts, Swift",
+        stacks: "CoreBluetooth, FileManager, Charts, Swift, Alamofire, AutoLayout, MVVM, RxSwift, RxCocoa",
         workDuration: "2023.05 ~ 2023.07",
         images: [
           "https://blogger.googleusercontent.com/img/a/AVvXsEjX-GI2OfL3zocFbSYaenRzwTEd-N45dtw6TEm8BODhzs2nmTEbHQqOVHCmnujv98t_NN3ym2Zfpdgx5OnEJWJULPs46foEwRqdNyvZn7ouPnwTzA5qz6Ccj9Y8jPIBCxqt48yP28L3oVkIEWttC-zE6APo7CbIeOdM9iImzAtn5N5kKVzkmZAfH6ZcXfQ",
@@ -259,7 +278,7 @@ export const reactNativeProjects : ProjectInfo[] = [
         title: "일본 편의점",
         type: "ReactNative",
         appDescription: "일본 편의점 상품을 소개하는 개인 프로젝트 앱",
-        userCnt: 100,
+        userCnt: 260,
         workHistory: "일본 편의점 상품 검색기능 구현\n" +
             "일본 편의점 상품 정보 웹 크롤링 구현\n" +
             "좋아요 기능 구현\n" +

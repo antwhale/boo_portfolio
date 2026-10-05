@@ -385,251 +385,7 @@ html, body {
   background-color: transparent;
 }
 
-/* ⭐️ 전체 어두운 백드롭 레이어 */
-.expanded-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px); /* 뒷배경 흐림 효과 */
-  z-index: 900;
-  animation: fadeIn 0.3s ease forwards;
-}
 
-/* ⭐️ 개별 랜덤 배치 액자 스타일 */
-.project-random-frame {
-  position: absolute; /* ◀️ 랜덤 좌표 배치를 위한 필수 속성 */
-  width: 320px; 
-
-  overflow: visible !important;
-  display: flex;
-  flex-direction: column;
-  
-  /* 사용자가 글자나 박스를 드래그 선택하는 파란 블록 지정 현상 방지 */
-  user-select: none;
-  /* 등장 시 은은하게 페이드인 */
-  animation: frameFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  /* ⭐️ 위치이동(top, left) 및 transform 스케일 변화에 부드러운 애니메이션 부여 */
-  transition: top 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-              left 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-              transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-              box-shadow 0.3s ease;
-}
-
-/* 호버 시 깊이감을 주기 위해 위로 올라오는 연출 */
-.project-random-frame:hover {
-  transform: translateY(-8px) scale(1.02);
-  z-index: 999 !important; /* 마우스를 올린 액자가 일시적으로 가장 앞으로 튀어나옴 */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* 마우스로 꾹 쥐었을 때 주먹 모양 커서로 변경 */
-.project-random-frame:active {
-  cursor: grabbing !important;
-}
-
-.frame-inner-layout {
-  display: flex;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.project-image-wrapper {
-  position: relative;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0; /* 커졌을 때 찌그러짐 방지 */
-}
-
-/* 이미지 액자 영역 */
-.project-image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  
-  overflow: hidden;
-
-  background-size: contain;
-  /* ⭐️ 액자 프레임 이미지가 바둑판처럼 조각조각 반복 노출되지 않도록 방지 */
-  background-repeat: no-repeat;
-
-  display: flex;
-  justify-content: center; /* 자식들을 가로 정가운데 정렬 */
-  align-items: center;     /* 자식들을 세로 정가운데 정렬 */
-
-  /* ⭐️ 래퍼 박스 크기에 맞춰 배경 프레임 이미지가 딱 맞게 늘어나거나 줄어들도록 설정 */
-  background-size: cover;
-}
-
-/* 대표 이미지 */
-.project-represent-img {
-  position: relative;
-
-  height: 100%;
-  object-fit: contain; /* 이미지가 찌그러지지 않고 액자에 꽉 차게 채움 */
-  transition: transform 0.5s ease;
-}
-
-.project-card-frame:hover .project-represent-img {
-  transform: scale(1.04); /* 호버 시 이미지가 액자 안에서 미세하게 줌인되는 세련된 효과 */
-}
-
-/* ⭐️ [핵심] 2배 커진 액자 내부 스위치에 맞춰 우측으로 자연스럽게 생성되는 디테일 텍스트 창 */
-.project-expanded-detail {
-  position: absolute;
-  left: 100%; /* 액자 박스의 100% 지점(오른쪽 끝)에서부터 시작 */
-  top: 0;
-  width: 100%; /* 상세 텍스트 창의 가로폭 */
-  height: 100%;
-  background-color: transparent;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 8px;
-  box-sizing: border-box;
-  overflow-y: visible; /* 내용이 길어질 경우 */
-  /* 등장 시 오른쪽으로 밀려나오는 애니메이션 */
-  animation: slideOut 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  transform-origin: left;
-}
-
-.project-expanded-detail.v h3 {
-  font-size: 12px;
-}
-
-.project-expanded-detail.v span {
-  font-size: 7px;
-}
-
-.project-expanded-detail.v p {
-  font-size: 8px;
-}
-
-/* 상세 보기 내부 폰트 스타일링 (정밀 축소 반영 - 2배 커지기 때문에 폰트는 작게 세팅) */
-.detail-title {
-  margin: 0;
-  font-size: 10px;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.detail-type-tag {
-  align-self: flex-start;
-  font-size: 6px;
-  background-color: #222;
-  color: #fff;
-  padding: 1px 4px;
-  border-radius: 2px;
-}
-
-.detail-description {
-  margin: 0;
-  font-size: 7px;
-  color: #ffffff;
-  line-height: 1.4;
-  white-space: pre-line;
-}
-
-.detail-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: 2px;
-}
-
-.detail-section.v h4 {
-  font-size: 9px;
-}
-
-.detail-section h4 {
-  margin: 0;
-  font-size: 7px;
-  color: #f3f3f3;
-  font-weight: 600;
-}
-
-
-.detail-section.v p {
-  font-size: 8px;
-}
-
-.detail-section p {
-  margin: 0;
-  font-size: 6.5px;
-  color: #e4e4e4;
-
-  white-space: pre-line;
-}
-
-.detail-section.v span {
-  font-size: 6.5px;
-}
-
-.detail-stacks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px;
-}
-
-.detail-stack-badge {
-  font-size: 5.5px;
-  background-color: #f1f3f5;
-  color: #495057;
-  padding: 1px 3px;
-  border-radius: 2px;
-}
-
-/* 애니메이션 키프레임 */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideOut {
-  from {
-    opacity: 0;
-    transform: scaleX(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-}
-
-/* Swiper를 감싸는 래퍼 클래스 */
-.project-swiper-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-/* ⭐️ Swiper 내부 네비게이션 버튼 & 페이지네이션 스타일 커스텀 (scale 2배 보정) */
-.project-swiper-container .swiper-button-next {
-  right: -10px !important;
-  color: #ffffff !important;
-  /* 부모 가 scale(2) 상태이므로 화살표 크기를 상대적으로 축소 제어 */
-  transform: scale(0.5); 
-}
-.project-swiper-container .swiper-button-prev {
-  left: -10px !important;
-  color: #ffffff !important;
-  /* 부모 가 scale(2) 상태이므로 화살표 크기를 상대적으로 축소 제어 */
-  transform: scale(0.5); 
-}
 
 .project-swiper-container .swiper-button-next::after,
 .project-swiper-container .swiper-button-prev::after {
@@ -647,4 +403,333 @@ html, body {
 .project-swiper-container .swiper-pagination-bullet-active {
   opacity: 1;
   background: #ffffff !important;
+}
+
+
+/* ProjectCarousel.css */
+.project-carousel-container {
+  padding: 1rem;
+  color: #262626;
+  user-select: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 20%;
+  transform: translateY(20%);
+}
+
+.project-carousel-wrapper {
+  width: 280px;
+  margin-top: 2rem;
+  perspective: 1000px;
+}
+
+/* 태블릿 이상의 화면 크기 */
+@media (min-width: 768px) {
+  .project-carousel-wrapper {
+    width: 320px;
+  }
+}
+
+.slides-container {
+  display: flex;
+  width: fit-content;
+}
+
+.slide-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  will-change: transform, scale;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.75rem;
+  /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
+  border: 1px solid #e5e5e5;
+  cursor: pointer;
+}
+
+.slide-text {
+  text-align: center;
+  width: 100%;
+  will-change: opacity, filter;
+}
+
+.slide-title {
+  font-weight: bold;
+  font-size: 1.125rem;
+  color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.slide-type {
+  font-size: 0.75rem;
+  color: #737373;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.carousel-controls {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  color: #404040;
+  border-radius: 9999px;
+  background-color: rgba(229, 229, 229, 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(229, 229, 229, 0.8);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  padding: 0.5rem;
+}
+
+.control-button {
+  padding: 0.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  color: inherit;
+}
+
+.control-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.dot {
+  border-radius: 9999px;
+  cursor: pointer;
+  height: 0.5rem;
+  transition: width 0.3s, background-color 0.3s;
+}
+
+.dot.active {
+  width: 1.5rem;
+  background-color: #262626;
+}
+
+.dot.inactive {
+  width: 0.5rem;
+  background-color: #a3a3a3;
+}
+
+.project-detail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background: rgb(10 12 14 / 76%);
+  backdrop-filter: blur(8px);
+  animation: fadeInOverlay 180ms ease-out;
+}
+
+.project-detail-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  width: min(1080px, 100%);
+  max-height: min(760px, 88vh);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 8px;
+  background: #f8f9fa;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 36%);
+  animation: slideInContent 240ms ease-out;
+}
+
+.project-detail-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 50%;
+  background: rgb(20 22 24 / 65%);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.project-detail-gallery {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #17191b;
+}
+
+.project-detail-swiper {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+}
+
+.project-detail-swiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  box-sizing: border-box;
+}
+
+.project-detail-swiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+}
+
+.project-detail-swiper .swiper-button-next,
+.project-detail-swiper .swiper-button-prev {
+  color: #fff;
+}
+
+.project-detail-swiper .swiper-pagination-bullet {
+  background: #fff;
+}
+
+.project-detail-content {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 48px 36px 36px;
+  color: #202326;
+  text-align: left;
+}
+
+.project-detail-type {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #52736d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.project-detail-content > h2 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.project-detail-description {
+  margin: 14px 0 28px;
+  color: #555c60;
+  line-height: 1.6;
+}
+
+.project-detail-section {
+  padding: 18px 0;
+  border-top: 1px solid #dfe3e4;
+}
+
+.project-detail-section h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.project-detail-section h3 span {
+  color: #70787b;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.project-detail-section p {
+  margin: 0;
+  color: #555c60;
+  font-size: 13px;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.project-detail-stacks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.project-detail-stacks span {
+  padding: 5px 8px;
+  border: 1px solid #d7dddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #41494c;
+  font-size: 11px;
+}
+
+@media (max-width: 700px) {
+  .project-detail-overlay {
+    padding: 12px;
+  }
+
+  .project-detail-modal {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(220px, 38vh) minmax(0, 1fr);
+    max-height: 94vh;
+  }
+
+  .project-detail-swiper {
+    min-height: 0;
+  }
+
+  .project-detail-swiper .swiper-slide {
+    padding: 38px 36px;
+  }
+
+  .project-detail-swiper .swiper-slide img {
+    max-height: 34vh;
+  }
+
+  .project-detail-content {
+    padding: 22px 20px 28px;
+  }
+
+  .project-detail-content > h2 {
+    padding-right: 32px;
+    font-size: 23px;
+  }
 }

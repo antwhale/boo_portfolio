@@ -4,6 +4,7 @@ import frameV from '../assets/image-frame-v.png';
 import frameH from '../assets/image-frame-h.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import {ProjectCarousel} from './ProjectCarousel';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -165,156 +166,79 @@ const ProjectsGroup: React.FC<ProjectsGroupProps> = ({ projects, setProjectSelec
     setProjectSelected(false);
   };
 
+  const expandedProject = expandedIdx === null ? null : projects[expandedIdx];
+
   return (
     <div className="projects-random-container" ref={containerRef}>
       {/*  배경 레이어 클릭 시 확대 모드 해제 */}
-      {expandedIdx !== null && (
-        <div className="expanded-backdrop" onClick={ handleClickBackdrop } >
-          <span className='close-button'>X EXIT THE SCREEN</span>
-        </div>          
+      <ProjectCarousel projects={projects} onClickProject={handleFrameClick} />
+      
+      {expandedProject && (
+        <div className="project-detail-overlay" onClick={handleClickBackdrop}>
+          <section
+            className={`project-detail-modal ${expandedProject.imageDirection}`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-detail-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button className="project-detail-close" onClick={handleClickBackdrop} aria-label="상세 보기 닫기">
+              ×
+            </button>
+
+            <div className="project-detail-gallery">
+              <Swiper
+                modules={[Navigation, Pagination]}
+                spaceBetween={0}
+                slidesPerView={1}
+                navigation={expandedProject.images.length > 1}
+                pagination={{ clickable: true }}
+                loop={expandedProject.images.length > 1}
+                className="project-detail-swiper"
+              >
+                {expandedProject.images.map((image, imageIndex) => (
+                  <SwiperSlide key={`${expandedProject.title}-${imageIndex}`}>
+                    <img src={image} alt={`${expandedProject.title} 이미지 ${imageIndex + 1}`} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
+            <div className="project-detail-content">
+              <span className="project-detail-type">{expandedProject.type}</span>
+              <h2 id="project-detail-title">{expandedProject.title}</h2>
+              <p className="project-detail-description">{expandedProject.appDescription}</p>
+
+              {expandedProject.workHistory && (
+                <section className="project-detail-section">
+                  <h3>작업 내역 <span>{expandedProject.workDuration}</span></h3>
+                  <p>{expandedProject.workHistory}</p>
+                </section>
+              )}
+
+              {expandedProject.userCnt > 0 && (
+                <section className="project-detail-section">
+                  <h3>이용자 수</h3>
+                  <p>{expandedProject.userCnt.toLocaleString()}명</p>
+                </section>
+              )}
+
+              <section className="project-detail-section">
+                <h3>사용 기술</h3>
+                <div className="project-detail-stacks">
+                  {expandedProject.stacks.split(',').map((stack) => (
+                    <span key={stack.trim()}>{stack.trim()}</span>
+                  ))}
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
       )}
 
-      {projects.map((project, index) => {
-        // ⭐️  images 배열의 첫 번째 이미지를 추출합니다. (없을 경우를 대비한 Fallback 처리)
-        const representImage = project.images && project.images.length > 0 
-          ? project.images[0] 
-          : 'https://via.placeholder.com/400x300?text=No+Image'; // 대체 이미지
-
-        // 해당 인덱스의 고유 실시간 좌표값 꺼내기
-        const pos = positions[index] || { top: 50, left: 50, zIndex: 20 };
-        // const randomZIndex = Math.floor(Math.random() * 10) + 1;
-        const aspectRatio = project.imageDirection === 'v' ? '2 / 3' : '3 / 2';
-        const frameImageUrl = project.imageDirection === 'v' ? frameV : frameH;
-
-        const isExpanded = expandedIdx === index;
-
-        // 이미지 배열 유효성 체크 및 폴백 설정
-        const projectImages = project.images && project.images.length > 0 
-          ? project.images 
-          : ['https://via.placeholder.com/400x300?text=No+Image'];
-
-        const transform = project.imageDirection == 'v' ? 'translate(-50%, -50%) scale(1.8)' : 'translate(-50%, -50%) scale(2.2)';
-
-        return (
-          <div key={`${project.title}-${index}`} 
-            className={`project-random-frame ${isExpanded ? 'is-expanded' : ''}`}
-            style={{
-            top: isExpanded ? '50%' : `${pos.top}%`,
-            left: isExpanded ? '30%' : `${pos.left}%`,
-            zIndex: isExpanded ? 999 : pos.zIndex,
-            transform: isExpanded ? transform : 'none',
-            cursor: isExpanded ? 'default' : 'grab'
-          }}
-          onMouseDown={(e) => handleDragStart(e, index)}
-          onTouchStart={(e) => handleDragStart(e, index)}
-          onClick={() => handleFrameClick(index)}
-          >
-            <div className="frame-inner-layout">
-              {/* 이미지 액자 영역 */}
-              <div
-                className="project-image-wrapper"
-                style={{ 
-                aspectHeight: undefined,
-                aspectRatio: aspectRatio,
-                backgroundImage: `url('${frameImageUrl}')`
-              } as React.CSSProperties}
-              >
-
-                {!isExpanded ? (
-                  <img 
-                    src={representImage} 
-                    alt={`${project.title} 대표 이미지`} 
-                    className="project-represent-img"
-                    loading="lazy" // 성능 최적화를 위한 지연 로딩
-                    width={project.imageDirection === 'v' ? '60%' : '80%'}
-                    draggable='false'
-                  />
-                ) : (
-                  // ⭐️ 클릭해서 x배 확대(isExpanded)되었을 때만 Swiper 가동
-                  // Swiper 내부 클릭 시 프레임이 닫히는 버그 방지를 위해 onClick 캡처 처리
-                  <div className="project-swiper-container" onClick={(e) => e.stopPropagation()}>
-                    <Swiper
-                      modules={[Navigation, Pagination]}
-                      spaceBetween={0}
-                      slidesPerView={1}
-                      navigation={true}
-                      pagination={{ clickable: true }}
-                      loop={projectImages.length > 1}
-                      style={{ width: '100%', height: '100%' }}
-                    >
-                      {projectImages.map((imgUrl, imgIdx) => (
-                        <SwiperSlide key={imgIdx} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                          <img 
-                            src={imgUrl} 
-                            alt={`${project.title} 이미지 ${imgIdx + 1}`} 
-                            className="project-represent-img"
-                            width={project.imageDirection === 'v' ? '60%' : '80%'}
-                            style={{ objectFit: 'contain' }}
-                            draggable='false'
-                          />
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  </div>
-                )}
-
-                
-              </div>
-
-              {/* ⭐️ [핵심 추가] x배 커졌을 때 오른쪽에 노출할 상세 텍스트 패널 */}
-              {isExpanded && (
-                <div className={`project-expanded-detail ${project.imageDirection}`} onClick={(e) => e.stopPropagation()}>
-                  <h3 className="detail-title">{project.title}</h3>
-                  <span className="detail-type-tag">{project.type}</span>
-                  <p className="detail-description">{project.appDescription}</p>
-                  
-                  {project.workHistory && (
-                    <div className={`detail-section ${project.imageDirection}`}>
-                      <h4>📊 작업 내역 ({project.workDuration})</h4>
-                      <p>{project.workHistory}</p>
-                    </div>
-                  )}
-
-                  {project.userCnt > 0 && (
-                    <div className={`detail-section ${project.imageDirection}`}>
-                      <h4>👥 이용자 수</h4>
-                      <p>{project.userCnt.toLocaleString()}명 이용 중</p>
-                    </div>
-                  )}
-
-                  <div className={`detail-section ${project.imageDirection}`}>
-                    <h4>🛠️ 사용 기술 스택</h4>
-                    <div className="detail-stacks">
-                      {project.stacks.split(',').map((stack, sIdx) => (
-                        <span key={sIdx} className="detail-stack-badge">{stack.trim()}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        );
-      })}
       
     </div>
   );
 };
 
 export default ProjectsGroup;
-
-     {/* 하단 텍스트 정보 영역 */}
-              {/* <div className="project-meta-info">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.appDescription}</p>
-                
-                {project.userCnt > 0 && (
-                  <span className="project-users">👥 {project.userCnt.toLocaleString()}명 이용 중</span>
-                )}
-                
-                <div className="project-stacks-badge">
-                  {project.stacks.split(',').map((stack, sIdx) => (
-                    <span key={sIdx} className="stack-badge">{stack.trim()}</span>
-                  ))}
-                </div>
-              </div> */}
